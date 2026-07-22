@@ -110,38 +110,127 @@ async function loadAllData() {
 function renderExecutiveSummary() {
   const e = STATE.exec;
   const kpis = [
-    { label: 'Total AI Spend Today', value: fmtUSD(e.total_spend_today), icon: 'fa-dollar-sign', color: 'text-cyan-400' },
-    { label: 'Monthly AI Spend', value: fmtUSD(e.monthly_spend), icon: 'fa-chart-line', color: 'text-blue-400' },
-    { label: 'Monthly Budget', value: fmtUSD(e.monthly_budget), icon: 'fa-wallet', color: 'text-violet-400' },
-    { label: 'Budget Remaining', value: fmtUSD(e.budget_remaining), icon: 'fa-piggy-bank', color: 'text-green-400' },
-    { label: 'Forecasted Month End', value: fmtUSD(e.forecasted_month_end), icon: 'fa-crystal-ball', color: 'text-amber-400' },
-    { label: 'Cost vs Last Month', value: '+' + fmtUSD(e.cost_diff_vs_last_month), icon: 'fa-arrow-trend-up', color: 'text-red-400' },
-    { label: 'Employees Using AI', value: fmtInt(e.total_employees_using_ai), icon: 'fa-users', color: 'text-cyan-400' },
-    { label: 'Active AI Agents', value: fmtInt(e.total_active_agents), icon: 'fa-robot', color: 'text-blue-400' },
-    { label: 'Total AI Requests', value: fmtNum(e.total_requests), icon: 'fa-bolt', color: 'text-violet-400' },
-    { label: 'Total Tokens Consumed', value: fmtNum(e.total_tokens_consumed), icon: 'fa-coins', color: 'text-amber-400' },
-    { label: 'Infrastructure Cost', value: fmtUSD(e.total_infra_cost), icon: 'fa-server', color: 'text-green-400' },
-    { label: 'External API Cost', value: fmtUSD(e.total_external_api_cost), icon: 'fa-plug', color: 'text-red-400' },
+    { label: 'Total AI Spend Today', value: fmtUSD(e.total_spend_today), icon: 'fa-dollar-sign', color: 'text-cyan-600' },
+    { label: 'Monthly AI Spend', value: fmtUSD(e.monthly_spend), icon: 'fa-chart-line', color: 'text-blue-600' },
+    { label: 'Monthly Budget (Allocated)', value: fmtUSD(e.monthly_budget), icon: 'fa-wallet', color: 'text-violet-600' },
+    { label: 'Budget Remaining', value: fmtUSD(e.budget_remaining), icon: 'fa-piggy-bank', color: 'text-green-600' },
+    { label: 'Cost vs Last Month', value: '+' + fmtUSD(e.cost_diff_vs_last_month), icon: 'fa-arrow-trend-up', color: 'text-red-500' },
+    { label: 'Employees Using AI', value: fmtInt(e.total_employees_using_ai), icon: 'fa-users', color: 'text-cyan-600' },
+    { label: 'Active AI Agents', value: fmtInt(e.total_active_agents), icon: 'fa-robot', color: 'text-blue-600' },
+    { label: 'Total Tokens Consumed', value: fmtNum(e.total_tokens_consumed), icon: 'fa-coins', color: 'text-amber-600' },
+    { label: 'Infrastructure Cost', value: fmtUSD(e.total_infra_cost), icon: 'fa-server', color: 'text-green-600' },
+    { label: 'External API Cost', value: fmtUSD(e.total_external_api_cost), icon: 'fa-plug', color: 'text-red-600' },
   ];
+  
   const grid = document.getElementById('kpi-grid');
-  grid.innerHTML = kpis.map(k => `
-    <div class="kpi-card">
-      <div class="flex items-center justify-between mb-2">
-        <span class="section-title">${k.label}</span>
-        <i class="fa-solid ${k.icon} ${k.color} text-sm"></i>
-      </div>
-      <p class="text-xl font-bold font-mono-num">${k.value}</p>
-    </div>`).join('') +
-    `<div class="kpi-card col-span-2 md:col-span-1">
-      <div class="flex items-center justify-between mb-2">
-        <span class="section-title">Overall AI Health Score</span>
-        <i class="fa-solid fa-heart-pulse text-green-400 text-sm"></i>
-      </div>
-      <div class="flex items-center gap-2">
-        <p class="text-xl font-bold font-mono-num">${e.overall_health_score}</p>
-        <div class="progress-track flex-1"><div class="progress-fill" style="width:${e.overall_health_score}%; background:${utilBarColor(100 - e.overall_health_score)}"></div></div>
-      </div>
-    </div>`;
+  grid.innerHTML = kpis.map(k => {
+    const isCostIncrease = k.label === 'Cost vs Last Month';
+    const cardClass = isCostIncrease 
+      ? 'kpi-card border-red-200 bg-red-50/50 flex flex-col justify-between min-h-[118px]' 
+      : 'kpi-card flex flex-col justify-between min-h-[118px]';
+    const labelClass = 'kpi-title';
+    const valueClass = isCostIncrease 
+      ? 'text-xl font-bold font-mono-num text-red-600 mt-3' 
+      : 'text-xl font-bold font-mono-num text-slate-800 mt-3';
+    const iconClass = `fa-solid ${k.icon} ${isCostIncrease ? 'text-red-500' : k.color} text-sm`;
+
+    return `
+      <div class="${cardClass}">
+        <div class="flex items-center justify-between gap-2">
+          <span class="${labelClass}">${k.label}</span>
+          <i class="${iconClass}"></i>
+        </div>
+        <p class="${valueClass}">${k.value}</p>
+      </div>`;
+  }).join('');
+
+  // Overall Health Score logical story
+  document.getElementById('health-score-value').textContent = e.overall_health_score;
+  const fill = document.getElementById('health-score-fill');
+  fill.style.width = e.overall_health_score + '%';
+
+  if (e.overall_health_score >= 80) {
+    fill.className = 'progress-fill bg-emerald-500';
+  } else if (e.overall_health_score >= 60) {
+    fill.className = 'progress-fill bg-amber-500';
+  } else {
+    fill.className = 'progress-fill bg-red-500';
+  }
+
+  // Tally system status details
+  const totalAgents = STATE.agents.length;
+  const healthyAgents = STATE.agents.filter(a => a.status === 'Healthy').length;
+  document.getElementById('health-story-agents').textContent = `${healthyAgents}/${totalAgents} AI Agents Healthy`;
+
+  const openAlerts = STATE.alerts.filter(a => a.status === 'Open').length;
+  const alertText = openAlerts === 1 ? '1 Alert Pending Action' : `${openAlerts} Alerts Pending Action`;
+  document.getElementById('health-story-alerts').textContent = alertText;
+
+  const spendOverhead = ((e.monthly_spend / e.monthly_budget) * 100).toFixed(1);
+  document.getElementById('health-story-overhead').textContent = `Spend at ${spendOverhead}% of total budget`;
+
+  // Draw 30-Day spend trend chart
+  renderSpendTrendChart();
+}
+
+function renderSpendTrendChart() {
+  const e = STATE.exec;
+  const avgDaily = e.monthly_spend / 30;
+  
+  const labels = Array.from({length: 30}, (_, i) => `Day ${i + 1}`);
+  const dataPoints = labels.map((_, i) => {
+    const fluctuation = Math.sin(i * 0.4) * 1100 + (Math.random() - 0.5) * 700;
+    return Math.round(avgDaily + fluctuation);
+  });
+
+  const ctx = document.getElementById('spend-trend-chart');
+  if (!ctx) return;
+  
+  if (window.__spendTrendChart) window.__spendTrendChart.destroy();
+  window.__spendTrendChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Daily AI Spend ($)',
+          data: dataPoints,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37,99,235,0.05)',
+          fill: true,
+          tension: 0.35,
+          pointRadius: 1.5,
+          borderWidth: 2
+        },
+        {
+          label: 'Daily Budget Limit ($)',
+          data: Array(30).fill(15000),
+          borderColor: '#ef4444',
+          borderDash: [5, 5],
+          fill: false,
+          pointRadius: 0,
+          borderWidth: 1.5
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#64748b', font: { size: 9 } },
+          grid: { display: false }
+        },
+        y: {
+          ticks: { color: '#64748b', font: { size: 9 } },
+          grid: { color: '#f1f5f9' }
+        }
+      }
+    }
+  });
 }
 
 /* ============================== 2. AI COST BREAKDOWN ============================== */
@@ -156,23 +245,47 @@ function renderCostBreakdown() {
     'External APIs': 'fa-plug', 'OCR': 'fa-file-lines', 'Speech APIs': 'fa-microphone', 'Image Generation': 'fa-image',
     'Monitoring Tools': 'fa-gauge-high'
   };
-  grid.innerHTML = STATE.costCats.map(c => `
-    <div class="glass-card p-4">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-xs font-semibold flex items-center gap-2"><i class="fa-solid ${icons[c.category] || 'fa-circle'} text-blue-400"></i>${c.category}</span>
-        ${growthPill(c.growth_pct)}
-      </div>
-      <p class="text-lg font-bold font-mono-num mb-1">${fmtUSDFull(c.current_cost)}</p>
-      <div class="flex justify-between text-[10px] text-slate-400 mb-2">
-        <span>Yesterday: ${fmtUSDFull(c.yesterday_cost)}</span>
-        <span>Monthly: ${fmtUSD(c.monthly_cost)}</span>
-      </div>
-      <div class="progress-track mb-1"><div class="progress-fill" style="width:${Math.min(c.utilization_pct,100)}%; background:${utilBarColor(c.utilization_pct)}"></div></div>
-      <div class="flex justify-between text-[10px] text-slate-400">
-        <span>${fmtPct(c.utilization_pct)} of budget</span>
-        <span>Budget: ${fmtUSD(c.budget)}</span>
-      </div>
-    </div>`).join('');
+  grid.innerHTML = STATE.costCats.map(c => {
+    const dod = c.yesterday_cost > 0 ? ((c.current_cost - c.yesterday_cost) / c.yesterday_cost) * 100 : 0;
+    return `
+      <div class="glass-card p-4 flex flex-col justify-between min-h-[178px]">
+        <div>
+          <!-- Category header -->
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold text-slate-700 flex items-center gap-2">
+              <i class="fa-solid ${icons[c.category] || 'fa-circle'} text-blue-500 text-[13px]"></i>
+              ${c.category}
+            </span>
+            ${growthPill(dod)}
+          </div>
+          
+          <!-- Daily Spend Metrics -->
+          <div class="flex justify-between items-baseline mb-3">
+            <div>
+              <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Today's Spend</p>
+              <p class="text-xl font-bold font-mono-num text-slate-800">${fmtUSDFull(c.current_cost)}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Yesterday</p>
+              <p class="text-xs font-semibold text-slate-500 font-mono-num">${fmtUSDFull(c.yesterday_cost)}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Budget Section -->
+        <div class="border-t border-slate-100 pt-3">
+          <div class="flex justify-between text-[10px] mb-1 font-semibold text-slate-500">
+            <span>Monthly Spend (${fmtUSD(c.monthly_cost)})</span>
+            <span>Budget: ${fmtUSD(c.budget)}</span>
+          </div>
+          <div class="progress-track mb-1.5" style="height: 5px;"><div class="progress-fill" style="width:${Math.min(c.utilization_pct,100)}%; background:${utilBarColor(c.utilization_pct)}"></div></div>
+          <div class="flex justify-between text-[9px] font-bold text-slate-400 uppercase tracking-wide">
+            <span>${fmtPct(c.utilization_pct)} Used</span>
+            <span>${fmtUSD(c.budget - c.monthly_cost)} Left</span>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
 }
 
 /* ============================== 3. LLM PROVIDER BREAKDOWN ============================== */
@@ -189,17 +302,13 @@ function renderLLMBreakdown(filter = 'All') {
       <td class="font-semibold">${l.model_name}</td>
       <td class="font-mono-num">${fmtNum(l.input_tokens)}</td>
       <td class="font-mono-num">${fmtNum(l.output_tokens)}</td>
-      <td class="font-mono-num text-cyan-400">${fmtNum(l.cached_tokens)}</td>
       <td class="font-mono-num">${fmtNum(l.requests)}</td>
-      <td class="font-mono-num">${l.avg_prompt_length}</td>
-      <td class="font-mono-num">${l.avg_response_length}</td>
       <td class="font-mono-num">${fmtUSDFull(l.avg_cost_per_request)}</td>
       <td class="font-mono-num font-semibold">${fmtUSD(l.total_cost)}</td>
       <td class="font-mono-num">${fmtMs(l.avg_latency)}</td>
-      <td class="font-mono-num ${l.error_rate > 0.6 ? 'text-red-400' : 'text-slate-300'}">${fmtPct(l.error_rate,2)}</td>
-      <td class="font-mono-num">${fmtInt(l.retry_count)}</td>
+      <td class="font-mono-num ${l.error_rate > 0.6 ? 'text-red-600 font-bold' : 'text-slate-600'}">${fmtPct(l.error_rate,2)}</td>
       <td class="font-mono-num">${fmtUSD(l.budget_allocation)}</td>
-      <td class="font-mono-num ${l.remaining_budget < l.budget_allocation*0.15 ? 'text-red-400':'text-green-400'}">${fmtUSD(l.remaining_budget)}</td>
+      <td class="font-mono-num ${l.remaining_budget < l.budget_allocation*0.15 ? 'text-red-600 font-bold':'text-emerald-600 font-medium'}">${fmtUSD(l.remaining_budget)}</td>
     </tr>`).join('');
 }
 
@@ -211,7 +320,6 @@ function renderEmbeddingModels() {
       <td class="font-mono-num">${fmtInt(e.documents_embedded)}</td>
       <td class="font-mono-num">${fmtNum(e.total_embeddings)}</td>
       <td class="font-mono-num">${fmtNum(e.tokens_processed)}</td>
-      <td class="font-mono-num">${e.avg_chunk_size}</td>
       <td class="font-mono-num">${fmtGB(e.storage_consumed)}</td>
       <td class="font-mono-num">${fmtUSD(e.embedding_cost)}</td>
       <td class="font-mono-num">${fmtNum(e.queries_served)}</td>
@@ -260,12 +368,7 @@ function renderVectorDatabases() {
         ${v.top_agents.slice(0,3).map(a => `<span class="chip"><i class="fa-solid fa-robot mr-1"></i>${a}</span>`).join('')}
       </div>
       <div class="flex justify-between text-[10px] text-slate-500 mt-2">
-        <span>Inactive: ${v.inactive_collections} · Deleted: ${v.deleted_collections}</span>
-        <span>Growth: +${v.storage_growth}%/mo</span>
-      </div>
-      <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-        <span>Forecast Storage: ${fmtGB(v.forecast_storage_growth)}</span>
-        <span>Forecast Cost: ${fmtUSD(v.forecast_cost)}</span>
+    
       </div>
       <p class="text-[10px] text-blue-400 mt-2 text-right"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>View Collections</p>
     </div>`;
@@ -288,7 +391,7 @@ function openVectorModal(dbName) {
       <table class="data-table">
         <thead><tr>
           <th>Collection</th><th>Allocated</th><th>Used</th><th>Embeddings</th><th>Chunks</th><th>Documents</th>
-          <th>Owner</th><th>Daily Queries</th><th>Monthly Cost</th><th>Retention</th>
+          <th>Owner</th><th>Daily Queries</th><th>Monthly Cost</th>
         </tr></thead>
         <tbody>
         ${collections.map(c => `
@@ -302,17 +405,11 @@ function openVectorModal(dbName) {
             <td>${c.owner}</td>
             <td class="font-mono-num">${fmtInt(c.daily_queries)}</td>
             <td class="font-mono-num font-semibold">${fmtUSD(c.monthly_cost)}</td>
-            <td>${c.retention_policy}</td>
           </tr>`).join('') || '<tr><td colspan="10" class="text-center text-slate-500 py-6">No collection detail available for this database.</td></tr>'}
         </tbody>
       </table>
     </div>
-    <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
-      <div class="glass-card p-3"><p class="text-slate-400">Top Employees</p><p class="font-semibold mt-1">${db.top_employees.join(', ')}</p></div>
-      <div class="glass-card p-3"><p class="text-slate-400">Largest Collections</p><p class="font-semibold mt-1">${db.largest_collections.join(', ')}</p></div>
-      <div class="glass-card p-3"><p class="text-slate-400">Growth Trend (6mo GB)</p><p class="font-semibold mt-1">${db.growth_trend.join(' → ')}</p></div>
-      <div class="glass-card p-3"><p class="text-slate-400">Forecast</p><p class="font-semibold mt-1">${fmtGB(db.forecast_storage_growth)} / ${fmtUSD(db.forecast_cost)}</p></div>
-    </div>
+
   `;
   modal.classList.remove('hidden');
 }
@@ -354,7 +451,6 @@ function renderDatabaseMonitoring() {
       <td class="font-mono-num">${fmtMs(d.latency)}</td>
       <td class="font-mono-num">${fmtGB(d.backup_size)}</td>
       <td class="font-mono-num">${fmtUSD(d.backup_cost)}</td>
-      <td>${growthPill(d.growth)}</td>
       <td class="font-mono-num font-semibold">${fmtUSD(d.monthly_cost)}</td>
     </tr>`).join('');
 }
@@ -417,7 +513,7 @@ function renderEmployeeConsumption() {
   ];
   document.getElementById('employee-kpi-grid').innerHTML = kpis.map(k => `
     <div class="kpi-card"><p class="section-title mb-1">${k.label}</p><p class="text-base font-bold font-mono-num">${k.value}</p></div>`).join('') +
-    `<div class="kpi-card"><p class="section-title mb-1">Near Limit / Exceeded</p><p class="text-base font-bold font-mono-num"><span class="text-amber-400">${nearLimit}</span> / <span class="text-red-400">${exceeded}</span></p></div>`;
+    `<!-- <div class="kpi-card"><p class="section-title mb-1">Near Limit / Exceeded</p><p class="text-base font-bold font-mono-num"><span class="text-amber-400">${nearLimit}</span> / <span class="text-red-400">${exceeded}</span></p></div> -->`;
 
   const sorted = [...emps].sort((a, b) => b.consumed_budget - a.consumed_budget);
   const top = sorted.slice(0, 6);

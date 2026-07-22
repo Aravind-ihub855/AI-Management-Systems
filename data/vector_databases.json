@@ -7,7 +7,7 @@
     "free_storage": 360,
     "storage_growth": 4.2,
     "vectors_stored": 184000000,
-    "collections_count": 42,
+    "collections_count": 2,
     "namespaces": 128,
     "embedding_count": 184000000,
     "avg_vector_dimension": 1536,
@@ -34,12 +34,11 @@
       "M. Chen"
     ],
     "largest_collections": [
-      "Engineering Docs",
-      "Support KB",
-      "Legal Contracts"
+      "Customer Feedback",
+      "Support KB"
     ],
-    "inactive_collections": 4,
-    "deleted_collections": 2,
+    "inactive_collections": 0,
+    "deleted_collections": 0,
     "growth_trend": [
       1420,
       1480,
@@ -59,7 +58,7 @@
     "free_storage": 380,
     "storage_growth": 3.6,
     "vectors_stored": 96000000,
-    "collections_count": 28,
+    "collections_count": 2,
     "namespaces": 64,
     "embedding_count": 96000000,
     "avg_vector_dimension": 1024,
@@ -84,11 +83,11 @@
       "S. Kim"
     ],
     "largest_collections": [
-      "Finance Reports",
+      "Finance Archives",
       "HR Policies"
     ],
-    "inactive_collections": 3,
-    "deleted_collections": 1,
+    "inactive_collections": 0,
+    "deleted_collections": 0,
     "growth_trend": [
       980,
       1020,
@@ -108,7 +107,7 @@
     "free_storage": 290,
     "storage_growth": 5.1,
     "vectors_stored": 52000000,
-    "collections_count": 19,
+    "collections_count": 2,
     "namespaces": 40,
     "embedding_count": 52000000,
     "avg_vector_dimension": 768,
@@ -134,9 +133,9 @@
     ],
     "largest_collections": [
       "Engineering Wiki",
-      "Runbooks"
+      "Ops Runbooks"
     ],
-    "inactive_collections": 2,
+    "inactive_collections": 0,
     "deleted_collections": 0,
     "growth_trend": [
       480,
@@ -157,7 +156,7 @@
     "free_storage": 120,
     "storage_growth": 2.4,
     "vectors_stored": 38000000,
-    "collections_count": 12,
+    "collections_count": 1,
     "namespaces": 22,
     "embedding_count": 38000000,
     "avg_vector_dimension": 768,
@@ -180,9 +179,9 @@
       "J. Lee"
     ],
     "largest_collections": [
-      "Research Papers"
+      "AI Paper Index"
     ],
-    "inactive_collections": 1,
+    "inactive_collections": 0,
     "deleted_collections": 0,
     "growth_trend": [
       380,
@@ -203,7 +202,7 @@
     "free_storage": 260,
     "storage_growth": 3.9,
     "vectors_stored": 44000000,
-    "collections_count": 16,
+    "collections_count": 2,
     "namespaces": 30,
     "embedding_count": 44000000,
     "avg_vector_dimension": 1024,
@@ -228,11 +227,11 @@
       "D. Ortiz"
     ],
     "largest_collections": [
-      "Marketing Assets",
-      "Sales Playbooks"
+      "Sales Playbooks",
+      "Marketing Assets"
     ],
-    "inactive_collections": 2,
-    "deleted_collections": 1,
+    "inactive_collections": 0,
+    "deleted_collections": 0,
     "growth_trend": [
       420,
       450,

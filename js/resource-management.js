@@ -55,7 +55,7 @@ function activateTab(tab) {
     }
   });
 
-  document.querySelectorAll('main section[id^="tab-"]').forEach(s => {
+  document.querySelectorAll('section[id^="tab-"]').forEach(s => {
     if (s.id === `tab-${tab}`) {
       s.classList.remove('hidden');
     } else {

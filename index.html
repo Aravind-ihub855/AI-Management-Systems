@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Operations — AI Management System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -112,34 +113,71 @@
       <div class="text-xs font-semibold text-slate-400">AI Management System</div>
     </header>
 
-    <div class="content-pane space-y-6">
+    <div class="content-pane space-y-10">
       
       <!-- ============================== CATEGORY: OVERVIEW ============================== -->
-      <div id="cat-overview" class="cat-section space-y-6">
+      <div id="cat-overview" class="cat-section space-y-10">
         <!-- SECTION 1: EXECUTIVE SUMMARY -->
-        <section id="executive-summary">
-          <div class="flex items-center justify-between mb-3">
+        <section id="executive-summary" class="space-y-8">
+          <div class="flex items-center justify-between">
             <div>
               <h2 class="text-base font-bold text-slate-800">Executive Summary</h2>
               <p class="text-xs text-slate-500">Today's health across the entire AI ecosystem</p>
             </div>
           </div>
-          <div id="kpi-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3"></div>
+          
+          <!-- Top Row: Overall Health (story) & 30-Day Spend Trend Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Health Score Card with Logical Story -->
+            <div class="glass-panel p-5 flex flex-col justify-between" id="health-score-card">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="section-title">Overall AI Health Score</span>
+                  <i class="fa-solid fa-heart-pulse text-emerald-500 text-sm"></i>
+                </div>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-3xl font-extrabold text-slate-900 font-mono-num" id="health-score-value">0</span>
+                  <div class="progress-track flex-1" style="height: 8px;"><div class="progress-fill bg-emerald-500" id="health-score-fill" style="width: 0%;"></div></div>
+                </div>
+              </div>
+              <div class="border-t border-slate-100 pt-3">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">System Health Log</p>
+                <ul class="text-xs space-y-1.5 text-slate-600 font-medium">
+                  <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> <span id="health-story-agents">8/9 AI Agents Healthy</span></li>
+                  <li class="flex items-center gap-1.5"><i class="fa-solid fa-triangle-exclamation text-amber-500 text-[10px]"></i> <span id="health-story-alerts">1 High Severity Alert</span></li>
+                  <li class="flex items-center gap-1.5"><i class="fa-solid fa-circle-nodes text-blue-500 text-[10px]"></i> <span id="health-story-overhead">Spend at 0% of budget</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 30-Day Spend Trend Chart -->
+            <div class="glass-panel p-5 lg:col-span-2 flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-2">
+                <span class="section-title">30-Day Spend Trend</span>
+                <span class="text-[10px] font-semibold text-emerald-600 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">Budget line at $15,000/day</span>
+              </div>
+              <div style="height: 140px; position: relative;">
+                <canvas id="spend-trend-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Row: Operational KPIs Grid -->
+          <div id="kpi-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6"></div>
         </section>
 
         <!-- SECTION 2: AI COST BREAKDOWN -->
-        <section id="cost-breakdown">
+        <section id="cost-breakdown" class="space-y-4">
           <div class="flex items-center justify-between mb-3">
             <div>
               <h2 class="text-base font-bold text-slate-800">AI Cost Breakdown</h2>
-              <p class="text-xs text-slate-500">Every dollar of AI spend, broken down by category</p>
             </div>
             <div class="text-right">
               <p class="text-[10px] text-slate-500 uppercase font-semibold">Total AI Cost (Today)</p>
               <p id="total-ai-cost-today" class="text-base font-bold font-mono-num text-blue-600">—</p>
             </div>
           </div>
-          <div id="cost-breakdown-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+          <div id="cost-breakdown-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
         </section>
 
         <!-- SECTION 12: ALERTS -->
@@ -180,9 +218,9 @@
           <div class="table-scroll">
             <table class="data-table">
               <thead><tr>
-                <th>Provider</th><th>Model</th><th>Input Tok</th><th>Output Tok</th><th>Cached Tok</th><th>Requests</th>
-                <th>Avg Prompt Len</th><th>Avg Resp Len</th><th>Avg Cost/Req</th><th>Total Cost</th><th>Avg Latency</th>
-                <th>Error Rate</th><th>Retries</th><th>Budget Alloc</th><th>Remaining Budget</th>
+                <th>Provider</th><th>Model</th><th>Input Tok</th><th>Output Tok</th><th>Requests</th>
+                <th>Avg Cost/Req</th><th>Total Cost</th><th>Avg Latency</th>
+                <th>Error Rate</th><th>Budget Alloc</th><th>Remaining Budget</th>
               </tr></thead>
               <tbody id="llm-table-body"></tbody>
             </table>
@@ -195,11 +233,10 @@
         <!-- SECTION 4: EMBEDDING MODELS -->
         <section id="embedding-models" class="glass-panel p-4">
           <h2 class="text-base font-bold text-slate-800 mb-1">Embedding Models</h2>
-          <p class="text-xs text-slate-500 mb-3">Every embedding model in use across the company</p>
           <div class="table-scroll">
             <table class="data-table">
               <thead><tr>
-                <th>Model</th><th>Docs Embedded</th><th>Total Embeddings</th><th>Tokens Processed</th><th>Avg Chunk Size</th>
+                <th>Model</th><th>Docs Embedded</th><th>Total Embeddings</th><th>Tokens Processed</th>
                 <th>Storage Consumed</th><th>Embedding Cost</th><th>Queries Served</th><th>Monthly Cost</th>
               </tr></thead>
               <tbody id="embedding-table-body"></tbody>
@@ -210,7 +247,7 @@
         <!-- SECTION 5: VECTOR DATABASE -->
         <section id="vector-database">
           <h2 class="text-base font-bold text-slate-800 mb-1">Vector Database Configurations</h2>
-          <p class="text-xs text-slate-500 mb-3">Storage, performance, cost & lineage per vector DB — click a card for collection detail</p>
+          <p class="text-xs text-slate-500 mb-3">Storage, performance, cost & lineage per vector DB</p>
           <div id="vector-db-grid" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4"></div>
         </section>
       </div>
