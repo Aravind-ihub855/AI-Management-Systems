@@ -33,8 +33,12 @@ function initTabs() {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const tab = navVal.replace('tab-', '');
-        window.history.pushState(null, '', `resource-management.html?tab=${tab}`);
-        activateTab(tab);
+        try {
+          window.history.pushState(null, '', `resource-management.html?tab=${tab}`);
+          activateTab(tab);
+        } catch (err) {
+          window.location.href = `resource-management.html?tab=${tab}`;
+        }
       });
     }
   });

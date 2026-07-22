@@ -42,8 +42,12 @@ function initCategorySidebar() {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const cat = navVal.replace('cat-', '');
-        window.history.pushState(null, '', `index.html?cat=${cat}`);
-        activateCategory(cat);
+        try {
+          window.history.pushState(null, '', `index.html?cat=${cat}`);
+          activateCategory(cat);
+        } catch (err) {
+          window.location.href = `index.html?cat=${cat}`;
+        }
       });
     }
   });
@@ -125,20 +129,21 @@ function renderExecutiveSummary() {
   const grid = document.getElementById('kpi-grid');
   grid.innerHTML = kpis.map(k => {
     const isCostIncrease = k.label === 'Cost vs Last Month';
+    const colorKey = isCostIncrease ? 'red' : k.color.replace('text-', '').split('-')[0];
     const cardClass = isCostIncrease 
-      ? 'kpi-card border-red-200 bg-red-50/50 flex flex-col justify-between min-h-[118px]' 
-      : 'kpi-card flex flex-col justify-between min-h-[118px]';
-    const labelClass = 'kpi-title';
+      ? 'kpi-card is-warning flex flex-col justify-between min-h-[128px]' 
+      : 'kpi-card flex flex-col justify-between min-h-[128px]';
     const valueClass = isCostIncrease 
-      ? 'text-xl font-bold font-mono-num text-red-600 mt-3' 
-      : 'text-xl font-bold font-mono-num text-slate-800 mt-3';
-    const iconClass = `fa-solid ${k.icon} ${isCostIncrease ? 'text-red-500' : k.color} text-sm`;
+      ? 'text-2xl font-extrabold font-mono-num text-red-600 mt-4' 
+      : 'text-2xl font-extrabold font-mono-num text-slate-800 mt-4';
 
     return `
       <div class="${cardClass}">
-        <div class="flex items-center justify-between gap-2">
-          <span class="${labelClass}">${k.label}</span>
-          <i class="${iconClass}"></i>
+        <div class="flex items-start justify-between gap-2">
+          <span class="kpi-title text-slate-500 font-bold uppercase tracking-wider text-[10px] leading-tight">${k.label}</span>
+          <div class="icon-capsule capsule-${colorKey}">
+            <i class="fa-solid ${k.icon} text-xs"></i>
+          </div>
         </div>
         <p class="${valueClass}">${k.value}</p>
       </div>`;
@@ -248,35 +253,31 @@ function renderCostBreakdown() {
   grid.innerHTML = STATE.costCats.map(c => {
     const dod = c.yesterday_cost > 0 ? ((c.current_cost - c.yesterday_cost) / c.yesterday_cost) * 100 : 0;
     return `
-      <div class="glass-card p-4 flex flex-col justify-between min-h-[178px]">
+      <div class="glass-card p-5 flex flex-col justify-between min-h-[190px]">
         <div>
-          <!-- Category header -->
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-bold text-slate-700 flex items-center gap-2">
-              <i class="fa-solid ${icons[c.category] || 'fa-circle'} text-blue-500 text-[13px]"></i>
-              ${c.category}
-            </span>
-            ${growthPill(dod)}
-          </div>
-          
-          <!-- Daily Spend Metrics -->
-          <div class="flex justify-between items-baseline mb-3">
-            <div>
-              <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Today's Spend</p>
-              <p class="text-xl font-bold font-mono-num text-slate-800">${fmtUSDFull(c.current_cost)}</p>
+          <!-- Split grid for header + primary stats -->
+          <div class="flex justify-between items-start mb-4">
+            <div class="space-y-1">
+              <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid ${icons[c.category] || 'fa-circle'} text-[12px] text-blue-500"></i>
+                ${c.category}
+              </span>
+              <p class="text-2xl font-extrabold font-mono-num text-slate-800">${fmtUSDFull(c.current_cost)}</p>
             </div>
-            <div class="text-right">
-              <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Yesterday</p>
-              <p class="text-xs font-semibold text-slate-500 font-mono-num">${fmtUSDFull(c.yesterday_cost)}</p>
+            <div class="text-right space-y-1.5 flex flex-col items-end">
+              ${growthPill(dod)}
+              <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-1">
+                Yest: <span class="font-mono-num font-semibold text-slate-600">${fmtUSD(c.yesterday_cost)}</span>
+              </p>
             </div>
           </div>
         </div>
 
-        <!-- Monthly Budget Section -->
+        <!-- Monthly Budget & Progress -->
         <div class="border-t border-slate-100 pt-3">
-          <div class="flex justify-between text-[10px] mb-1 font-semibold text-slate-500">
+          <div class="flex justify-between text-[11px] mb-1 font-semibold text-slate-500">
             <span>Monthly Spend (${fmtUSD(c.monthly_cost)})</span>
-            <span>Budget: ${fmtUSD(c.budget)}</span>
+            <span class="text-slate-400">Budget: ${fmtUSD(c.budget)}</span>
           </div>
           <div class="progress-track mb-1.5" style="height: 5px;"><div class="progress-fill" style="width:${Math.min(c.utilization_pct,100)}%; background:${utilBarColor(c.utilization_pct)}"></div></div>
           <div class="flex justify-between text-[9px] font-bold text-slate-400 uppercase tracking-wide">
@@ -332,45 +333,62 @@ function renderVectorDatabases() {
   const grid = document.getElementById('vector-db-grid');
   grid.innerHTML = STATE.vectorDbs.map(v => {
     const storagePct = (v.used_storage / v.allocated_storage) * 100;
-    return `
-    <div class="glass-card p-4 cursor-pointer" onclick="openVectorModal('${v.name}')">
-      <div class="flex items-center justify-between mb-3">
-        <span class="text-sm font-bold flex items-center gap-2"><i class="fa-solid fa-cube text-violet-400"></i>${v.name}</span>
-        <span class="pill pill-blue">${v.collections_count} collections</span>
-      </div>
-      <div class="grid grid-cols-2 gap-2 text-[11px] mb-3">
-        <div><span class="text-slate-400">Used / Allocated</span><p class="font-mono-num font-semibold">${fmtGB(v.used_storage)} / ${fmtGB(v.allocated_storage)}</p></div>
-        <div><span class="text-slate-400">Free Storage</span><p class="font-mono-num font-semibold">${fmtGB(v.free_storage)}</p></div>
-        <div><span class="text-slate-400">Vectors Stored</span><p class="font-mono-num font-semibold">${fmtNum(v.vectors_stored)}</p></div>
-        <div><span class="text-slate-400">Namespaces</span><p class="font-mono-num font-semibold">${v.namespaces}</p></div>
-        <div><span class="text-slate-400">Avg Vector Dim</span><p class="font-mono-num font-semibold">${v.avg_vector_dimension}</p></div>
-        <div><span class="text-slate-400">Index Size</span><p class="font-mono-num font-semibold">${fmtGB(v.index_size)}</p></div>
-        <div><span class="text-slate-400">Retrieval Latency</span><p class="font-mono-num font-semibold">${fmtMs(v.avg_retrieval_latency)}</p></div>
-        <div><span class="text-slate-400">Cache Hit Ratio</span><p class="font-mono-num font-semibold">${fmtPct(v.cache_hit_ratio)}</p></div>
-        <div><span class="text-slate-400">Read / Write Q</span><p class="font-mono-num font-semibold">${fmtNum(v.read_queries)} / ${fmtNum(v.write_queries)}</p></div>
-        <div><span class="text-slate-400">Search Queries</span><p class="font-mono-num font-semibold">${fmtNum(v.search_queries)}</p></div>
-        <div><span class="text-slate-400">Replication</span><p class="font-mono-num font-semibold">x${v.replication_count}</p></div>
-        <div><span class="text-slate-400">Backup Size / Cost</span><p class="font-mono-num font-semibold">${fmtGB(v.backup_size)} / ${fmtUSD(v.backup_cost)}</p></div>
-      </div>
-      <div class="mb-2">
-        <div class="flex justify-between text-[10px] text-slate-400 mb-1"><span>Storage Utilization</span><span>${fmtPct(storagePct)}</span></div>
-        <div class="progress-track"><div class="progress-fill" style="width:${storagePct}%; background:${utilBarColor(storagePct)}"></div></div>
-      </div>
-      <div class="flex justify-between items-center text-[11px] border-t border-white/8 pt-2 mt-2">
-        <span class="text-slate-400">Monthly Cost</span>
-        <span class="font-mono-num font-bold">${fmtUSD(v.monthly_cost)}</span>
-      </div>
-      <div class="flex justify-between items-center text-[11px]">
-        <span class="text-slate-400">Cost/GB · Cost/1M Queries</span>
-        <span class="font-mono-num">${fmtUSDFull(v.cost_per_gb)} · ${fmtUSDFull(v.cost_per_million_queries)}</span>
-      </div>
-      <div class="flex flex-wrap gap-1 mt-2">
-        ${v.top_agents.slice(0,3).map(a => `<span class="chip"><i class="fa-solid fa-robot mr-1"></i>${a}</span>`).join('')}
-      </div>
-      <div class="flex justify-between text-[10px] text-slate-500 mt-2">
+    const capsuleColor = v.name === 'Pinecone' ? 'cyan' : v.name === 'Milvus' ? 'blue' : v.name === 'Qdrant' ? 'violet' : v.name === 'FAISS' ? 'green' : 'amber';
     
+    return `
+    <div class="glass-card p-5 cursor-pointer flex flex-col justify-between min-h-[380px]" onclick="openVectorModal('${v.name}')">
+      <div>
+        <!-- Card Header -->
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-sm font-bold flex items-center gap-2">
+            <div class="icon-capsule capsule-${capsuleColor} w-8 h-8 rounded-lg">
+              <i class="fa-solid fa-cube text-xs"></i>
+            </div>
+            ${v.name}
+          </span>
+          <span class="pill pill-blue">${v.collections_count} ${v.collections_count === 1 ? 'collection' : 'collections'}</span>
+        </div>
+
+        <!-- Primary Stats Block -->
+        <div class="grid grid-cols-2 gap-4 mb-4 border-b border-slate-100 pb-3">
+          <div>
+            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Vectors Stored</span>
+            <p class="text-lg font-extrabold font-mono-num text-slate-800">${fmtNum(v.vectors_stored)}</p>
+          </div>
+          <div>
+            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Monthly Spend</span>
+            <p class="text-lg font-extrabold font-mono-num text-slate-800">${fmtUSD(v.monthly_cost)}</p>
+          </div>
+        </div>
+
+        <!-- Storage Info -->
+        <div class="mb-4">
+          <div class="flex justify-between text-[11px] text-slate-500 font-semibold mb-1">
+            <span>Used: ${fmtGB(v.used_storage)} / ${fmtGB(v.allocated_storage)}</span>
+            <span>${fmtPct(storagePct)}</span>
+          </div>
+          <div class="progress-track" style="height: 5px;"><div class="progress-fill" style="width:${storagePct}%; background:${utilBarColor(storagePct)}"></div></div>
+        </div>
+
+        <!-- Technical & Performance Sub-Panel -->
+        <div class="bg-slate-50/70 border border-slate-100 rounded-lg p-3 grid grid-cols-2 gap-x-3 gap-y-2 text-[10px] text-slate-500 mb-4 font-medium">
+          <div><span class="text-slate-400 font-semibold">Latency:</span> <span class="font-mono-num text-slate-700">${fmtMs(v.avg_retrieval_latency)}</span></div>
+          <div><span class="text-slate-400 font-semibold">Cache Hit:</span> <span class="font-mono-num text-slate-700">${fmtPct(v.cache_hit_ratio)}</span></div>
+          <div><span class="text-slate-400 font-semibold">Index Size:</span> <span class="font-mono-num text-slate-700">${fmtGB(v.index_size)}</span></div>
+          <div><span class="text-slate-400 font-semibold">Dim Size:</span> <span class="font-mono-num text-slate-700">${v.avg_vector_dimension}</span></div>
+          <div class="col-span-2"><span class="text-slate-400 font-semibold">Read/Write Q:</span> <span class="font-mono-num text-slate-700">${fmtNum(v.read_queries)} / ${fmtNum(v.write_queries)}</span></div>
+        </div>
       </div>
-      <p class="text-[10px] text-blue-400 mt-2 text-right"><i class="fa-solid fa-arrow-up-right-from-square mr-1"></i>View Collections</p>
+
+      <!-- Footer: Connected Agents -->
+      <div class="border-t border-slate-100 pt-3 flex items-center justify-between gap-2 flex-wrap">
+        <div class="flex flex-wrap gap-1">
+          ${v.top_agents.slice(0, 2).map(a => `<span class="chip"><i class="fa-solid fa-robot mr-1"></i>${a.split(' ')[0]}</span>`).join('')}
+        </div>
+        <p class="text-[10px] text-blue-500 font-bold hover:underline flex items-center gap-1">
+          View Collections <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+        </p>
+      </div>
     </div>`;
   }).join('');
 }
@@ -531,25 +549,37 @@ function renderDepartmentSummary() {
   document.getElementById('department-grid').innerHTML = STATE.departments.map(d => {
     const pct = (d.consumed_budget / d.allocated_budget) * 100;
     return `
-    <div class="glass-card p-4">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm font-bold">${d.name}</span>
-        <span class="pill ${pct > 90 ? 'pill-red' : pct > 75 ? 'pill-amber' : 'pill-green'}">${fmtPct(pct)} used</span>
+    <div class="glass-card p-6 flex flex-col justify-between min-h-[360px]">
+      <div>
+        <!-- Card Header -->
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-base font-extrabold text-slate-800">${d.name}</span>
+          <span class="pill ${pct > 90 ? 'pill-red' : pct > 75 ? 'pill-amber' : 'pill-green'}">${fmtPct(pct)} used</span>
+        </div>
+
+        <!-- Progress track -->
+        <div class="progress-track mb-4" style="height: 6px;"><div class="progress-fill" style="width:${Math.min(pct,100)}%; background:${utilBarColor(pct)}"></div></div>
+
+        <!-- Spacious Grid for Budgets -->
+        <div class="grid grid-cols-2 gap-x-4 gap-y-3.5 text-[10px] mb-4">
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Allocated Budget</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtUSD(d.allocated_budget)}</p></div>
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Consumed</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtUSD(d.consumed_budget)}</p></div>
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Remaining</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtUSD(d.remaining_budget)}</p></div>
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Avg Cost</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtUSDFull(d.avg_cost)}</p></div>
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Allocated Tokens</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtNum(d.allocated_tokens)}</p></div>
+          <div><span class="text-slate-400 font-bold uppercase tracking-wider">Consumed Tokens</span><p class="font-mono-num font-extrabold text-sm text-slate-800 mt-0.5">${fmtNum(d.consumed_tokens)}</p></div>
+        </div>
       </div>
-      <div class="progress-track mb-2"><div class="progress-fill" style="width:${Math.min(pct,100)}%; background:${utilBarColor(pct)}"></div></div>
-      <div class="grid grid-cols-2 gap-2 text-[11px] mb-2">
-        <div><span class="text-slate-400">Allocated Budget</span><p class="font-mono-num font-semibold">${fmtUSD(d.allocated_budget)}</p></div>
-        <div><span class="text-slate-400">Consumed</span><p class="font-mono-num font-semibold">${fmtUSD(d.consumed_budget)}</p></div>
-        <div><span class="text-slate-400">Remaining</span><p class="font-mono-num font-semibold">${fmtUSD(d.remaining_budget)}</p></div>
-        <div><span class="text-slate-400">Avg Cost</span><p class="font-mono-num font-semibold">${fmtUSDFull(d.avg_cost)}</p></div>
-        <div><span class="text-slate-400">Allocated Tokens</span><p class="font-mono-num font-semibold">${fmtNum(d.allocated_tokens)}</p></div>
-        <div><span class="text-slate-400">Consumed Tokens</span><p class="font-mono-num font-semibold">${fmtNum(d.consumed_tokens)}</p></div>
-      </div>
-      <div class="text-[11px] space-y-1 border-t border-white/8 pt-2">
-        <p><span class="text-slate-400">Top Models:</span> ${d.top_models.map(m=>`<span class="chip">${m}</span>`).join('')}</p>
-        <p><span class="text-slate-400">Top Agents:</span> ${d.top_agents.map(m=>`<span class="chip">${m}</span>`).join('')}</p>
-        <p><span class="text-slate-400">Top Employees:</span> ${d.top_employees.join(', ')}</p>
-        <p><span class="text-slate-400">Forecast:</span> <span class="font-mono-num font-semibold text-amber-400">${fmtUSD(d.forecast)}</span></p>
+
+      <!-- Spacious Metadata Footer -->
+      <div class="text-[11px] space-y-2.5 border-t border-slate-100 pt-3">
+        <p class="flex items-center gap-1.5 flex-wrap"><span class="text-slate-400 font-bold uppercase tracking-wider text-[9px]">Top Models:</span> ${d.top_models.map(m=>`<span class="chip">${m}</span>`).join('')}</p>
+        <p class="flex items-center gap-1.5 flex-wrap"><span class="text-slate-400 font-bold uppercase tracking-wider text-[9px]">Top Agents:</span> ${d.top_agents.map(m=>`<span class="chip">${m}</span>`).join('')}</p>
+        <p class="text-slate-500 font-medium"><span class="text-slate-400 font-bold uppercase tracking-wider text-[9px] mr-1">Top Employees:</span> ${d.top_employees.join(', ')}</p>
+        <div class="flex justify-between items-center text-slate-500 font-medium">
+          <span class="text-slate-400 font-bold uppercase tracking-wider text-[9px]">Forecast:</span> 
+          <span class="font-mono-num font-extrabold text-amber-600">${fmtUSD(d.forecast)}</span>
+        </div>
       </div>
     </div>`;
   }).join('');

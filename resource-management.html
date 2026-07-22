@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2.1">
 </head>
 <body class="min-h-screen">
 
@@ -20,12 +20,12 @@
     <div>
       <!-- Brand logo -->
       <div class="flex items-center gap-3 mb-6 px-3">
-        <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white">
-          <i class="fa-solid fa-server"></i>
+        <div class="logo-capsule">
+          <i class="fa-solid fa-server text-blue-600"></i>
         </div>
         <div>
-          <h1 class="text-sm font-bold leading-none text-slate-900">AI Management</h1>
-          <p class="text-[10px] text-slate-500 mt-0.5 leading-none">Organisation Portal</p>
+          <h1 class="text-sm font-extrabold leading-none text-slate-900 logo-title">AI Management</h1>
+          <p class="text-[10px] text-slate-500 mt-1 leading-none font-bold uppercase tracking-wider">Organisation Hub</p>
         </div>
       </div>
 
@@ -88,12 +88,15 @@
     </div>
 
     <!-- Sidebar User Profile Info -->
-    <div class="border-t border-slate-200 pt-4 mt-6">
+    <div class="user-avatar-widget">
       <div class="flex items-center gap-3 px-2">
-        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold text-white flex-shrink-0">HO</div>
+        <div class="relative flex-shrink-0">
+          <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold text-white shadow-sm">HO</div>
+          <div class="absolute bottom-0 right-0 pulse-status"></div>
+        </div>
         <div class="min-w-0">
-          <p class="text-xs font-semibold leading-none text-slate-800 truncate">Head of Operations</p>
-          <p class="text-[9px] text-slate-500 leading-none mt-1">Enterprise Admin</p>
+          <p class="text-xs font-bold leading-none text-slate-800 truncate">Head of Operations</p>
+          <p class="text-[9px] text-slate-500 leading-none mt-1.5 font-medium">Enterprise Admin</p>
         </div>
       </div>
     </div>
