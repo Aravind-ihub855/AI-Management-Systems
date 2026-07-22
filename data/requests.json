@@ -1,0 +1,6 @@
+[
+  { "id": "r1", "employee_name": "J. Costa", "request_type": "More Tokens", "details": "Need 500K more monthly tokens for Q3 support surge", "status": "Pending", "submitted_at": "2026-07-21T10:00:00Z" },
+  { "id": "r2", "employee_name": "N. Ivanov", "request_type": "Premium Model", "details": "Request access to Claude 3 Opus for audit workflows", "status": "Approved", "submitted_at": "2026-07-19T09:30:00Z" },
+  { "id": "r3", "employee_name": "L. Wei", "request_type": "New Agent Access", "details": "Access to DevOps Bot for infra scripting", "status": "Pending", "submitted_at": "2026-07-20T14:15:00Z" },
+  { "id": "r4", "employee_name": "P. Adams", "request_type": "Higher Budget", "details": "Increase monthly budget from $400 to $600", "status": "Rejected", "submitted_at": "2026-07-18T16:40:00Z" }
+]

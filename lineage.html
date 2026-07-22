@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Lineage Explorer — Enterprise AI Operations Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen">
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e1a]/90 backdrop-blur-md">
+  <div class="max-w-[1600px] mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+        <i class="fa-solid fa-satellite-dish text-white text-sm"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold leading-none">AI OpsCenter</h1>
+        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Resource Lineage Explorer</p>
+      </div>
+    </div>
+    <nav class="hidden md:flex items-center gap-1">
+      <a href="index.html" class="nav-link">Mission Control</a>
+      <a href="resource-management.html" class="nav-link">Resource Management</a>
+      <a href="employee.html" class="nav-link">Employee View</a>
+      <a href="lineage.html" class="nav-link active">Lineage Explorer</a>
+    </nav>
+    <div class="flex items-center gap-2 pl-3 border-l border-white/10">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold">HO</div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1600px] mx-auto px-5 py-6 space-y-6">
+
+  <div>
+    <h1 class="text-xl font-bold flex items-center gap-2"><i class="fa-solid fa-diagram-project text-blue-400"></i>Resource Lineage — End-to-End Traceability</h1>
+    <p class="text-xs text-slate-400 mt-1 max-w-3xl">The most valuable capability for enterprise AI operations: trace any AI request end-to-end — from the employee who triggered it, through every agent, model, vector database, tool call and cloud resource involved, down to the exact token count, dollar cost, and execution time. This gives Finance, Engineering, and Operations complete visibility into where every token, API call, CPU cycle, gigabyte of storage, and dollar was spent.</p>
+  </div>
+
+  <!-- ============================== SEARCH / SELECT REQUEST ============================== -->
+  <section class="glass-panel p-4">
+    <div class="flex items-center gap-3 flex-wrap">
+      <div class="flex-1 min-w-[240px]">
+        <label class="text-xs text-slate-400 block mb-1">Select or search a request / prompt ID</label>
+        <input type="text" id="lineage-search" placeholder="Search by prompt ID, employee, agent, model..." class="w-full">
+      </div>
+      <div class="min-w-[200px]">
+        <label class="text-xs text-slate-400 block mb-1">Quick select</label>
+        <select id="lineage-select" class="w-full"></select>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== LINEAGE FLOW ============================== -->
+  <section class="glass-panel p-5">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-base font-bold">Traceability Chain</h2>
+      <span class="pill pill-blue" id="lineage-request-id">—</span>
+    </div>
+    <div id="lineage-flow" class="flex flex-wrap items-center gap-2"></div>
+  </section>
+
+  <!-- ============================== DETAIL BREAKDOWN ============================== -->
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-user mr-1"></i>Who & Where</p>
+      <div class="space-y-2 text-[12px]" id="lineage-who"></div>
+    </div>
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-robot mr-1"></i>Agent & Workflow</p>
+      <div class="space-y-2 text-[12px]" id="lineage-agent"></div>
+    </div>
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-brain mr-1"></i>Models</p>
+      <div class="space-y-2 text-[12px]" id="lineage-models"></div>
+    </div>
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-database mr-1"></i>Vector DB & Knowledge</p>
+      <div class="space-y-2 text-[12px]" id="lineage-vector"></div>
+    </div>
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-toolbox mr-1"></i>Tools & External APIs</p>
+      <div class="space-y-2 text-[12px]" id="lineage-tools"></div>
+    </div>
+    <div class="glass-card p-4">
+      <p class="section-title mb-2"><i class="fa-solid fa-server mr-1"></i>Databases & Cloud Resources</p>
+      <div class="space-y-2 text-[12px]" id="lineage-infra"></div>
+    </div>
+  </section>
+
+  <!-- ============================== TOTALS ============================== -->
+  <section class="glass-panel p-5">
+    <p class="section-title mb-3">Final Attribution</p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="kpi-card text-center"><i class="fa-solid fa-coins text-amber-400 text-lg mb-2"></i><p class="text-2xl font-bold font-mono-num" id="lineage-total-tokens">—</p><p class="section-title mt-1">Total Tokens</p></div>
+      <div class="kpi-card text-center"><i class="fa-solid fa-dollar-sign text-green-400 text-lg mb-2"></i><p class="text-2xl font-bold font-mono-num" id="lineage-total-cost">—</p><p class="section-title mt-1">Total Cost</p></div>
+      <div class="kpi-card text-center"><i class="fa-solid fa-stopwatch text-cyan-400 text-lg mb-2"></i><p class="text-2xl font-bold font-mono-num" id="lineage-exec-time">—</p><p class="section-title mt-1">Execution Time</p></div>
+    </div>
+  </section>
+
+  <!-- ============================== ALL TRACES TABLE ============================== -->
+  <section class="glass-panel p-4">
+    <h2 class="text-base font-bold mb-3">All Traceable Requests</h2>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Request ID</th><th>Employee</th><th>Department</th><th>Project</th><th>Agent</th><th>LLM</th>
+          <th>Vector DB</th><th>Tokens</th><th>Cost</th><th>Exec Time</th>
+        </tr></thead>
+        <tbody id="lineage-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="text-center text-[11px] text-slate-500 py-6">AI OpsCenter · Resource Lineage Explorer — True Enterprise AI Management</footer>
+</main>
+
+<script src="js/api.js"></script>
+<script src="js/lineage.js"></script>
+</body>
+</html>

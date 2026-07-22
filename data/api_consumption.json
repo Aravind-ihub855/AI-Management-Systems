@@ -1,0 +1,9 @@
+[
+  { "id": "a1", "api_name": "OpenAI", "api_calls": 1252000, "success": 1246000, "failures": 6000, "latency": 720, "cost": 48100, "retries": 4100, "rate_limits": 210 },
+  { "id": "a2", "api_name": "Slack", "api_calls": 84000, "success": 83200, "failures": 800, "latency": 140, "cost": 420, "retries": 210, "rate_limits": 18 },
+  { "id": "a3", "api_name": "Salesforce", "api_calls": 42000, "success": 41400, "failures": 600, "latency": 260, "cost": 1800, "retries": 180, "rate_limits": 22 },
+  { "id": "a4", "api_name": "GitHub", "api_calls": 68000, "success": 67600, "failures": 400, "latency": 180, "cost": 0, "retries": 90, "rate_limits": 10 },
+  { "id": "a5", "api_name": "Google", "api_calls": 128000, "success": 126800, "failures": 1200, "latency": 210, "cost": 2400, "retries": 320, "rate_limits": 34 },
+  { "id": "a6", "api_name": "Microsoft", "api_calls": 96000, "success": 95200, "failures": 800, "latency": 230, "cost": 1900, "retries": 240, "rate_limits": 28 },
+  { "id": "a7", "api_name": "Twilio", "api_calls": 18000, "success": 17820, "failures": 180, "latency": 310, "cost": 640, "retries": 60, "rate_limits": 6 }
+]

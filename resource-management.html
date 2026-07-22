@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Resource Management — Enterprise AI Operations Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen">
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e1a]/90 backdrop-blur-md">
+  <div class="max-w-[1800px] mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+        <i class="fa-solid fa-satellite-dish text-white text-sm"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold leading-none">AI OpsCenter</h1>
+        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Enterprise AI Operations Platform</p>
+      </div>
+    </div>
+    <nav class="hidden md:flex items-center gap-1">
+      <a href="index.html" class="nav-link">Mission Control</a>
+      <a href="resource-management.html" class="nav-link active">Resource Management</a>
+      <a href="employee.html" class="nav-link">Employee View</a>
+      <a href="lineage.html" class="nav-link">Lineage Explorer</a>
+    </nav>
+    <div class="flex items-center gap-2 pl-3 border-l border-white/10">
+      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold">HO</div>
+      <div class="hidden sm:block">
+        <p class="text-xs font-semibold leading-none">Head of Operations</p>
+        <p class="text-[10px] text-slate-400 leading-none">Enterprise Admin</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1800px] mx-auto px-5 py-6 space-y-8">
+
+  <div>
+    <h1 class="text-xl font-bold">AI Resource Management</h1>
+    <p class="text-xs text-slate-400">Everything is configurable here — Agent Inventory & Employee Management</p>
+  </div>
+
+  <div class="flex gap-2" id="page-tabs">
+    <button class="tab-btn active" data-tab="agents">1. Agent Inventory</button>
+    <button class="tab-btn" data-tab="employees">2. Employee Management</button>
+  </div>
+
+  <!-- ============================== TAB 1: AGENT INVENTORY ============================== -->
+  <section id="tab-agents">
+    <div class="glass-panel p-4">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h2 class="text-base font-bold">Every AI Agent</h2>
+          <p class="text-xs text-slate-400">Click a row to open the full Agent Overview</p>
+        </div>
+        <div class="flex gap-2">
+          <input type="text" id="agent-search" placeholder="Search agent, owner, department..." class="w-64">
+          <select id="agent-status-filter">
+            <option value="All">All Statuses</option>
+            <option>Healthy</option><option>Warning</option><option>Critical</option><option>Disabled</option><option>Experimental</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr>
+            <th>Agent Name</th><th>Agent ID</th><th>Department</th><th>Owner</th><th>Status</th>
+            <th>Purpose</th><th>Environment</th><th>Created</th><th>Last Updated</th><th>Version</th>
+          </tr></thead>
+          <tbody id="agent-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== TAB 2: EMPLOYEE MANAGEMENT ============================== -->
+  <section id="tab-employees" class="hidden space-y-4">
+    <div class="glass-panel p-4">
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <div>
+          <h2 class="text-base font-bold">Employee Management — Admin Panel</h2>
+          <p class="text-xs text-slate-400">Search, filter, and take bulk action on employee AI access</p>
+        </div>
+        <div class="flex gap-2 flex-wrap">
+          <input type="text" id="emp-search" placeholder="Search employee, ID, manager..." class="w-56">
+          <select id="emp-dept-filter"><option value="All">All Departments</option></select>
+          <select id="emp-role-filter"><option value="All">All Roles</option></select>
+          <select id="emp-status-filter"><option value="All">All Statuses</option><option>Active</option><option>Near Limit</option><option>Exceeded</option><option>Suspended</option></select>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+        <p class="text-xs text-slate-400" id="emp-selection-count">0 employees selected</p>
+        <div class="flex gap-2 flex-wrap" id="bulk-actions">
+          <button class="btn-ghost" data-action="allocate-tokens"><i class="fa-solid fa-coins mr-1"></i>Allocate Tokens</button>
+          <button class="btn-ghost" data-action="increase-budget"><i class="fa-solid fa-arrow-up mr-1"></i>Increase Budget</button>
+          <button class="btn-ghost" data-action="reduce-budget"><i class="fa-solid fa-arrow-down mr-1"></i>Reduce Budget</button>
+          <button class="btn-ghost" data-action="assign-agents"><i class="fa-solid fa-robot mr-1"></i>Assign Agents</button>
+          <button class="btn-ghost" data-action="restrict-models"><i class="fa-solid fa-ban mr-1"></i>Restrict Models</button>
+          <button class="btn-ghost" data-action="suspend-access"><i class="fa-solid fa-lock mr-1"></i>Suspend Access</button>
+          <button class="btn-primary" data-action="export-reports"><i class="fa-solid fa-file-export mr-1"></i>Export Reports</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead><tr>
+            <th><input type="checkbox" id="emp-select-all"></th>
+            <th>Employee</th><th>ID</th><th>Department</th><th>Manager</th><th>Role</th><th>Status</th>
+            <th>Alloc Daily Tok</th><th>Alloc Monthly Tok</th><th>Alloc Budget</th>
+            <th>Consumed Tok</th><th>Consumed Budget</th><th>Remaining Budget</th>
+            <th>Priority</th><th>Daily Reset</th><th>Budget Expiry</th><th>Approval</th>
+          </tr></thead>
+          <tbody id="employee-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center text-[11px] text-slate-500 py-6">
+    AI OpsCenter · AI Resource Management — Agent Inventory & Employee Admin Panel
+  </footer>
+</main>
+
+<!-- ============================== MODAL: AGENT DEEP DIVE ============================== -->
+<div id="agent-modal" class="modal-overlay hidden">
+  <div class="modal-panel p-6" id="agent-modal-content"></div>
+</div>
+
+<!-- ============================== MODAL: BULK ACTION ============================== -->
+<div id="bulk-modal" class="modal-overlay hidden">
+  <div class="modal-panel p-6" id="bulk-modal-content" style="max-width:520px"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/resource-management.js"></script>
+</body>
+</html>

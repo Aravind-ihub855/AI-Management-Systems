@@ -1,0 +1,67 @@
+[
+  {
+    "id": "v1", "name": "Pinecone", "allocated_storage": 2000, "used_storage": 1640, "free_storage": 360, "storage_growth": 4.2,
+    "vectors_stored": 184000000, "collections_count": 42, "namespaces": 128, "embedding_count": 184000000, "avg_vector_dimension": 1536,
+    "index_size": 1720, "read_queries": 8400000, "write_queries": 920000, "search_queries": 7600000, "avg_retrieval_latency": 38,
+    "cache_hit_ratio": 76.4, "replication_count": 3, "backup_size": 410, "backup_cost": 320, "monthly_cost": 9800,
+    "cost_per_gb": 5.97, "cost_per_million_queries": 11.2,
+    "top_agents": ["Support Copilot", "Research Assistant", "Sales RAG Bot"],
+    "top_employees": ["A. Sharma", "J. Lee", "M. Chen"],
+    "largest_collections": ["Engineering Docs", "Support KB", "Legal Contracts"],
+    "inactive_collections": 4, "deleted_collections": 2,
+    "growth_trend": [1420, 1480, 1520, 1560, 1600, 1640],
+    "forecast_storage_growth": 1780, "forecast_cost": 10600
+  },
+  {
+    "id": "v2", "name": "Milvus", "allocated_storage": 1500, "used_storage": 1120, "free_storage": 380, "storage_growth": 3.6,
+    "vectors_stored": 96000000, "collections_count": 28, "namespaces": 64, "embedding_count": 96000000, "avg_vector_dimension": 1024,
+    "index_size": 980, "read_queries": 4200000, "write_queries": 540000, "search_queries": 3800000, "avg_retrieval_latency": 44,
+    "cache_hit_ratio": 69.8, "replication_count": 2, "backup_size": 260, "backup_cost": 190, "monthly_cost": 6100,
+    "cost_per_gb": 5.45, "cost_per_million_queries": 14.8,
+    "top_agents": ["Finance Analyst Bot", "HR Assistant"],
+    "top_employees": ["R. Patel", "S. Kim"],
+    "largest_collections": ["Finance Reports", "HR Policies"],
+    "inactive_collections": 3, "deleted_collections": 1,
+    "growth_trend": [980, 1020, 1050, 1080, 1100, 1120],
+    "forecast_storage_growth": 1210, "forecast_cost": 6700
+  },
+  {
+    "id": "v3", "name": "Qdrant", "allocated_storage": 900, "used_storage": 610, "free_storage": 290, "storage_growth": 5.1,
+    "vectors_stored": 52000000, "collections_count": 19, "namespaces": 40, "embedding_count": 52000000, "avg_vector_dimension": 768,
+    "index_size": 540, "read_queries": 2100000, "write_queries": 280000, "search_queries": 1900000, "avg_retrieval_latency": 29,
+    "cache_hit_ratio": 81.2, "replication_count": 2, "backup_size": 140, "backup_cost": 95, "monthly_cost": 3200,
+    "cost_per_gb": 5.25, "cost_per_million_queries": 9.6,
+    "top_agents": ["Code Agent", "DevOps Bot"],
+    "top_employees": ["T. Nguyen", "K. Brown"],
+    "largest_collections": ["Engineering Wiki", "Runbooks"],
+    "inactive_collections": 2, "deleted_collections": 0,
+    "growth_trend": [480, 510, 540, 570, 590, 610],
+    "forecast_storage_growth": 660, "forecast_cost": 3500
+  },
+  {
+    "id": "v4", "name": "FAISS", "allocated_storage": 600, "used_storage": 480, "free_storage": 120, "storage_growth": 2.4,
+    "vectors_stored": 38000000, "collections_count": 12, "namespaces": 22, "embedding_count": 38000000, "avg_vector_dimension": 768,
+    "index_size": 420, "read_queries": 1400000, "write_queries": 120000, "search_queries": 1250000, "avg_retrieval_latency": 22,
+    "cache_hit_ratio": 73.5, "replication_count": 1, "backup_size": 90, "backup_cost": 48, "monthly_cost": 1800,
+    "cost_per_gb": 3.75, "cost_per_million_queries": 7.1,
+    "top_agents": ["Research Assistant"],
+    "top_employees": ["J. Lee"],
+    "largest_collections": ["Research Papers"],
+    "inactive_collections": 1, "deleted_collections": 0,
+    "growth_trend": [380, 400, 420, 440, 460, 480],
+    "forecast_storage_growth": 520, "forecast_cost": 1950
+  },
+  {
+    "id": "v5", "name": "Weaviate", "allocated_storage": 800, "used_storage": 540, "free_storage": 260, "storage_growth": 3.9,
+    "vectors_stored": 44000000, "collections_count": 16, "namespaces": 30, "embedding_count": 44000000, "avg_vector_dimension": 1024,
+    "index_size": 470, "read_queries": 1800000, "write_queries": 160000, "search_queries": 1550000, "avg_retrieval_latency": 33,
+    "cache_hit_ratio": 71.9, "replication_count": 2, "backup_size": 120, "backup_cost": 80, "monthly_cost": 2500,
+    "cost_per_gb": 4.63, "cost_per_million_queries": 10.4,
+    "top_agents": ["Marketing Content Bot", "Sales RAG Bot"],
+    "top_employees": ["M. Chen", "D. Ortiz"],
+    "largest_collections": ["Marketing Assets", "Sales Playbooks"],
+    "inactive_collections": 2, "deleted_collections": 1,
+    "growth_trend": [420, 450, 480, 500, 520, 540],
+    "forecast_storage_growth": 585, "forecast_cost": 2700
+  }
+]

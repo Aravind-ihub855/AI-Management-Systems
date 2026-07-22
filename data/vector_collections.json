@@ -1,0 +1,7 @@
+[
+  { "id": "vc1", "vector_db_name": "Pinecone", "collection_name": "HR Documents", "allocated_storage": 180, "used_storage": 142, "embedding_count": 9800000, "chunk_count": 420000, "documents": 8400, "owner": "S. Kim (HR)", "daily_queries": 18400, "monthly_cost": 840, "retention_policy": "3 years" },
+  { "id": "vc2", "vector_db_name": "Pinecone", "collection_name": "Finance", "allocated_storage": 220, "used_storage": 190, "embedding_count": 12400000, "chunk_count": 540000, "documents": 11200, "owner": "R. Patel (Finance)", "daily_queries": 24600, "monthly_cost": 1080, "retention_policy": "7 years" },
+  { "id": "vc3", "vector_db_name": "Pinecone", "collection_name": "Legal", "allocated_storage": 260, "used_storage": 238, "embedding_count": 15200000, "chunk_count": 610000, "documents": 13800, "owner": "D. Ortiz (Legal)", "daily_queries": 9800, "monthly_cost": 1240, "retention_policy": "10 years" },
+  { "id": "vc4", "vector_db_name": "Pinecone", "collection_name": "Engineering", "allocated_storage": 420, "used_storage": 380, "embedding_count": 38400000, "chunk_count": 1420000, "documents": 42000, "owner": "T. Nguyen (Eng)", "daily_queries": 68200, "monthly_cost": 2100, "retention_policy": "Indefinite" },
+  { "id": "vc5", "vector_db_name": "Pinecone", "collection_name": "Support", "allocated_storage": 340, "used_storage": 312, "embedding_count": 29800000, "chunk_count": 1180000, "documents": 36400, "owner": "A. Sharma (Support)", "daily_queries": 94200, "monthly_cost": 1860, "retention_policy": "2 years" }
+]

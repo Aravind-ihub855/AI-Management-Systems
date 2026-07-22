@@ -1,0 +1,7 @@
+[
+  { "id": "e1", "model": "text-embedding-3-large", "documents_embedded": 184000, "total_embeddings": 5200000, "tokens_processed": 410000000, "avg_chunk_size": 512, "storage_consumed": 820, "embedding_cost": 6100, "queries_served": 1840000, "monthly_cost": 6100 },
+  { "id": "e2", "model": "text-embedding-3-small", "documents_embedded": 260000, "total_embeddings": 7100000, "tokens_processed": 390000000, "avg_chunk_size": 480, "storage_consumed": 540, "embedding_cost": 2400, "queries_served": 2600000, "monthly_cost": 2400 },
+  { "id": "e3", "model": "Cohere embed-v3", "documents_embedded": 92000, "total_embeddings": 2600000, "tokens_processed": 180000000, "avg_chunk_size": 460, "storage_consumed": 310, "embedding_cost": 1980, "queries_served": 940000, "monthly_cost": 1980 },
+  { "id": "e4", "model": "Gemini text-embedding-004", "documents_embedded": 64000, "total_embeddings": 1800000, "tokens_processed": 120000000, "avg_chunk_size": 500, "storage_consumed": 210, "embedding_cost": 1120, "queries_served": 610000, "monthly_cost": 1120 },
+  { "id": "e5", "model": "BGE-large-en", "documents_embedded": 38000, "total_embeddings": 980000, "tokens_processed": 68000000, "avg_chunk_size": 420, "storage_consumed": 140, "embedding_cost": 560, "queries_served": 320000, "monthly_cost": 560 }
+]

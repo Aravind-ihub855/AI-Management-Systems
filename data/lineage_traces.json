@@ -1,0 +1,90 @@
+[
+  {
+    "id": "lt1", "request_id": "PMT-88213", "employee_name": "A. Sharma", "department": "Support", "project": "Customer Support Automation",
+    "agent_name": "Support Copilot", "workflow": "Ticket Resolution Flow v3", "prompt_summary": "Customer asking about refund policy for order #4821",
+    "llm_model": "GPT-4o", "embedding_model": "text-embedding-3-small", "vector_database": "Pinecone", "knowledge_collection": "Support",
+    "retrieved_documents": ["Refund_Policy_v4.pdf", "Order_Terms.pdf"],
+    "tool_calls": ["Zendesk.getTicket", "Salesforce.getOrder"],
+    "external_apis": ["Salesforce API"],
+    "database_queries": ["Postgres: orders WHERE id=4821"],
+    "cloud_resources": ["AWS Lambda: ticket-router", "AWS GPU: inference-pool-2"],
+    "total_tokens": 2100, "total_cost": 0.18, "execution_time_ms": 640
+  },
+  {
+    "id": "lt2", "request_id": "PMT-88214", "employee_name": "T. Nguyen", "department": "Engineering", "project": "Internal Dev Tools",
+    "agent_name": "Code Agent", "workflow": "PR Review Flow", "prompt_summary": "Review pull request #2291 for security vulnerabilities",
+    "llm_model": "GPT-5", "embedding_model": "text-embedding-3-large", "vector_database": "Qdrant", "knowledge_collection": "Engineering Wiki",
+    "retrieved_documents": ["Secure_Coding_Guidelines.md", "OWASP_Checklist.md"],
+    "tool_calls": ["GitHub.getPR", "GitHub.postComment"],
+    "external_apis": ["GitHub API"],
+    "database_queries": ["MongoDB: pr_metadata"],
+    "cloud_resources": ["AWS Kubernetes: code-agent-pod-14", "AWS GPU: inference-pool-1"],
+    "total_tokens": 4200, "total_cost": 0.36, "execution_time_ms": 810
+  },
+  {
+    "id": "lt3", "request_id": "PMT-88215", "employee_name": "R. Patel", "department": "Finance", "project": "Q3 Financial Audit",
+    "agent_name": "Finance Analyst Bot", "workflow": "Anomaly Detection Flow", "prompt_summary": "Flag anomalies in Q3 vendor payment batch",
+    "llm_model": "Claude 3 Opus", "embedding_model": "Cohere embed-v3", "vector_database": "Milvus", "knowledge_collection": "Finance Reports",
+    "retrieved_documents": ["Q3_Vendor_Payments.xlsx", "Audit_Rules_2026.pdf"],
+    "tool_calls": ["NetSuite.getLedger"],
+    "external_apis": ["NetSuite API"],
+    "database_queries": ["Postgres: ledger_entries WHERE quarter=Q3"],
+    "cloud_resources": ["Azure GPU: finance-pool-1", "Azure VM: batch-worker-3"],
+    "total_tokens": 3100, "total_cost": 0.29, "execution_time_ms": 960
+  },
+  {
+    "id": "lt4", "request_id": "PMT-88216", "employee_name": "K. Brown", "department": "Engineering", "project": "Infra Reliability Program",
+    "agent_name": "DevOps Bot", "workflow": "Incident Auto-Remediation Flow", "prompt_summary": "Diagnose repeated pod crash in payment-service namespace",
+    "llm_model": "DeepSeek V3", "embedding_model": "N/A", "vector_database": "Qdrant", "knowledge_collection": "Runbooks",
+    "retrieved_documents": ["Pod_Crash_Runbook.md", "K8s_Troubleshooting.md"],
+    "tool_calls": ["PagerDuty.getIncident", "Kubernetes.getLogs", "GitHub.createIssue"],
+    "external_apis": ["PagerDuty API", "Kubernetes API"],
+    "database_queries": ["Elastic: logs WHERE service=payment-service"],
+    "cloud_resources": ["AWS Kubernetes: payment-cluster", "AWS CPU: worker-pool-4"],
+    "total_tokens": 1800, "total_cost": 0.02, "execution_time_ms": 390
+  },
+  {
+    "id": "lt5", "request_id": "PMT-88217", "employee_name": "S. Kim", "department": "HR", "project": "Employee Self-Service Portal",
+    "agent_name": "HR Assistant", "workflow": "Policy Q&A Flow", "prompt_summary": "What is the parental leave policy for engineering staff?",
+    "llm_model": "GPT-4o", "embedding_model": "Gemini text-embedding-004", "vector_database": "Milvus", "knowledge_collection": "HR Policies",
+    "retrieved_documents": ["Parental_Leave_Policy.pdf", "Benefits_Handbook_2026.pdf"],
+    "tool_calls": ["Workday.getEmployeeRecord"],
+    "external_apis": ["Workday API"],
+    "database_queries": ["MongoDB: hr_policies"],
+    "cloud_resources": ["Azure VM: hr-bot-instance-2"],
+    "total_tokens": 1500, "total_cost": 0.11, "execution_time_ms": 520
+  },
+  {
+    "id": "lt6", "request_id": "PMT-88218", "employee_name": "D. Ortiz", "department": "Marketing", "project": "Q3 Campaign Launch",
+    "agent_name": "Marketing Content Bot", "workflow": "Content Drafting Flow", "prompt_summary": "Draft social media copy for new product launch",
+    "llm_model": "Gemini 2.5 Pro", "embedding_model": "text-embedding-3-small", "vector_database": "Weaviate", "knowledge_collection": "Marketing Assets",
+    "retrieved_documents": ["Brand_Voice_Guide.pdf", "Product_Launch_Brief.docx"],
+    "tool_calls": ["Canva.generateAsset"],
+    "external_apis": ["Canva API"],
+    "database_queries": ["Postgres: campaign_assets"],
+    "cloud_resources": ["GCP GPU: content-gen-pool"],
+    "total_tokens": 2600, "total_cost": 0.13, "execution_time_ms": 580
+  },
+  {
+    "id": "lt7", "request_id": "PMT-88219", "employee_name": "J. Lee", "department": "Engineering", "project": "AI Research Initiative",
+    "agent_name": "Research Assistant", "workflow": "Literature Synthesis Flow", "prompt_summary": "Summarize latest papers on retrieval-augmented generation efficiency",
+    "llm_model": "Gemini 2.5 Pro", "embedding_model": "BGE-large-en", "vector_database": "FAISS", "knowledge_collection": "Research Papers",
+    "retrieved_documents": ["RAG_Efficiency_2026.pdf", "Vector_Index_Survey.pdf"],
+    "tool_calls": ["ArXiv.search"],
+    "external_apis": ["ArXiv API"],
+    "database_queries": ["Postgres: research_library"],
+    "cloud_resources": ["AWS GPU: research-pool-1"],
+    "total_tokens": 3800, "total_cost": 0.21, "execution_time_ms": 610
+  },
+  {
+    "id": "lt8", "request_id": "PMT-88220", "employee_name": "M. Chen", "department": "Marketing", "project": "Sales Enablement",
+    "agent_name": "Sales RAG Bot", "workflow": "Playbook Q&A Flow", "prompt_summary": "What discount tiers apply for enterprise renewal deals?",
+    "llm_model": "GPT-4o", "embedding_model": "text-embedding-3-large", "vector_database": "Weaviate", "knowledge_collection": "Sales Playbooks",
+    "retrieved_documents": ["Discount_Tier_Matrix.xlsx", "Renewal_Playbook.pdf"],
+    "tool_calls": ["Salesforce.getOpportunity"],
+    "external_apis": ["Salesforce API"],
+    "database_queries": ["Postgres: opportunities"],
+    "cloud_resources": ["AWS Lambda: sales-bot-router"],
+    "total_tokens": 1900, "total_cost": 0.15, "execution_time_ms": 540
+  }
+]

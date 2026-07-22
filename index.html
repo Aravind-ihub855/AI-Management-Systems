@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission Control — Enterprise AI Operations Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="min-h-screen">
+
+<!-- ============================== TOP NAV ============================== -->
+<header class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0e1a]/90 backdrop-blur-md">
+  <div class="max-w-[1800px] mx-auto px-5 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center">
+        <i class="fa-solid fa-satellite-dish text-white text-sm"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-bold leading-none">AI OpsCenter</h1>
+        <p class="text-[10px] text-slate-400 leading-none mt-0.5">Enterprise AI Operations Platform</p>
+      </div>
+    </div>
+    <nav class="hidden md:flex items-center gap-1" id="main-nav">
+      <a href="index.html" class="nav-link active">Mission Control</a>
+      <a href="resource-management.html" class="nav-link">Resource Management</a>
+      <a href="employee.html" class="nav-link">Employee View</a>
+      <a href="lineage.html" class="nav-link">Lineage Explorer</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <div class="hidden lg:flex items-center gap-2 text-[11px] text-slate-400">
+        <span class="blink-dot"></span> Live · <span id="clock-time" class="font-mono-num"></span>
+      </div>
+      <div class="flex items-center gap-2 pl-3 border-l border-white/10">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-xs font-bold">HO</div>
+        <div class="hidden sm:block">
+          <p class="text-xs font-semibold leading-none">Head of Operations</p>
+          <p class="text-[10px] text-slate-400 leading-none">Enterprise Admin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-[1800px] mx-auto px-5 py-6 space-y-8">
+
+  <!-- ============================== SECTION 1: EXECUTIVE SUMMARY ============================== -->
+  <section id="executive-summary">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="text-lg font-bold">1. Executive Summary</h2>
+        <p class="text-xs text-slate-400">Today's health across the entire AI ecosystem</p>
+      </div>
+      <span class="pill pill-blue"><i class="fa-solid fa-circle-check mr-1"></i>Live Data</span>
+    </div>
+    <div id="kpi-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3"></div>
+  </section>
+
+  <!-- ============================== SECTION 2: AI COST BREAKDOWN ============================== -->
+  <section id="cost-breakdown">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="text-lg font-bold">2. AI Cost Breakdown</h2>
+        <p class="text-xs text-slate-400">Every dollar of AI spend, broken down by category</p>
+      </div>
+      <div class="text-right">
+        <p class="text-[10px] text-slate-400 uppercase">Total AI Cost (Today)</p>
+        <p id="total-ai-cost-today" class="text-lg font-bold font-mono-num">—</p>
+      </div>
+    </div>
+    <div id="cost-breakdown-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+  </section>
+
+  <!-- ============================== SECTION 3: LLM PROVIDER BREAKDOWN ============================== -->
+  <section id="llm-breakdown" class="glass-panel p-4">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <h2 class="text-lg font-bold">3. LLM Provider Breakdown</h2>
+        <p class="text-xs text-slate-400">One row per provider / model</p>
+      </div>
+      <div class="flex gap-1" id="llm-provider-filter"></div>
+    </div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Provider</th><th>Model</th><th>Input Tok</th><th>Output Tok</th><th>Cached Tok</th><th>Requests</th>
+          <th>Avg Prompt Len</th><th>Avg Resp Len</th><th>Avg Cost/Req</th><th>Total Cost</th><th>Avg Latency</th>
+          <th>Error Rate</th><th>Retries</th><th>Budget Alloc</th><th>Remaining Budget</th>
+        </tr></thead>
+        <tbody id="llm-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 4: EMBEDDING MODELS ============================== -->
+  <section id="embedding-models" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">4. Embedding Models</h2>
+    <p class="text-xs text-slate-400 mb-3">Every embedding model in use across the company</p>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Model</th><th>Docs Embedded</th><th>Total Embeddings</th><th>Tokens Processed</th><th>Avg Chunk Size</th>
+          <th>Storage Consumed</th><th>Embedding Cost</th><th>Queries Served</th><th>Monthly Cost</th>
+        </tr></thead>
+        <tbody id="embedding-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 5: VECTOR DATABASE ============================== -->
+  <section id="vector-database">
+    <h2 class="text-lg font-bold mb-1">5. Vector Database</h2>
+    <p class="text-xs text-slate-400 mb-3">Storage, performance, cost & lineage per vector DB — click a card for collection detail</p>
+    <div id="vector-db-grid" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- ============================== SECTION 6: CLOUD INFRASTRUCTURE ============================== -->
+  <section id="cloud-infrastructure" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">6. Cloud Infrastructure</h2>
+    <p class="text-xs text-slate-400 mb-3">AWS · Azure · GCP resource allocation & cost</p>
+    <div class="flex gap-1 mb-3" id="cloud-provider-tabs"></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Provider</th><th>Resource</th><th>Allocated</th><th>Used</th><th>Remaining</th>
+          <th>Current Cost</th><th>Monthly Cost</th><th>Forecast</th>
+        </tr></thead>
+        <tbody id="cloud-infra-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 7: DATABASE MONITORING ============================== -->
+  <section id="db-monitoring" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">7. Database Monitoring</h2>
+    <p class="text-xs text-slate-400 mb-3">Postgres · MongoDB · Redis · Elastic</p>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>Database</th><th>Allocated Storage</th><th>Used Storage</th><th>Connections</th><th>Read Ops</th>
+          <th>Write Ops</th><th>Queries</th><th>Latency</th><th>Backup Size</th><th>Backup Cost</th><th>Growth</th><th>Monthly Cost</th>
+        </tr></thead>
+        <tbody id="db-monitor-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 8: API CONSUMPTION ============================== -->
+  <section id="api-consumption" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">8. API Consumption</h2>
+    <p class="text-xs text-slate-400 mb-3">External APIs & integrations</p>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr>
+          <th>API</th><th>Calls</th><th>Success</th><th>Failures</th><th>Latency</th><th>Cost</th><th>Retries</th><th>Rate Limits</th>
+        </tr></thead>
+        <tbody id="api-consumption-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 9: AI AGENT SUMMARY ============================== -->
+  <section id="agent-summary">
+    <h2 class="text-lg font-bold mb-3">9. AI Agent Summary</h2>
+    <div id="agent-summary-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3"></div>
+  </section>
+
+  <!-- ============================== SECTION 10: EMPLOYEE CONSUMPTION ============================== -->
+  <section id="employee-consumption" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">10. Employee Consumption</h2>
+    <p class="text-xs text-slate-400 mb-3">Company-wide employee token & budget usage</p>
+    <div id="employee-kpi-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-4"></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div>
+        <p class="section-title mb-2">Top Consumers</p>
+        <div class="table-scroll" style="max-height:260px">
+          <table class="data-table"><thead><tr><th>Employee</th><th>Dept</th><th>Consumed Budget</th><th>Consumed Tokens</th></tr></thead>
+          <tbody id="top-consumers-body"></tbody></table>
+        </div>
+      </div>
+      <div>
+        <p class="section-title mb-2">Least Consumers</p>
+        <div class="table-scroll" style="max-height:260px">
+          <table class="data-table"><thead><tr><th>Employee</th><th>Dept</th><th>Consumed Budget</th><th>Consumed Tokens</th></tr></thead>
+          <tbody id="least-consumers-body"></tbody></table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== SECTION 11: DEPARTMENT SUMMARY ============================== -->
+  <section id="department-summary">
+    <h2 class="text-lg font-bold mb-3">11. Department Summary</h2>
+    <div id="department-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+  </section>
+
+  <!-- ============================== SECTION 12: ALERTS ============================== -->
+  <section id="alerts-section" class="glass-panel p-4">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-bold">12. Alerts</h2>
+      <div class="flex gap-1" id="alert-filter-tabs"></div>
+    </div>
+    <div id="alerts-list" class="space-y-2 max-h-[420px] overflow-y-auto scroll-thin"></div>
+  </section>
+
+  <!-- ============================== SECTION 13: FORECAST ============================== -->
+  <section id="forecast-section" class="glass-panel p-4">
+    <h2 class="text-lg font-bold mb-1">13. Forecast</h2>
+    <p class="text-xs text-slate-400 mb-3">Predictive AI cost & resource trajectory</p>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+      <div class="glass-card p-4" style="height:280px"><canvas id="forecast-spend-chart"></canvas></div>
+      <div class="glass-card p-4" style="height:280px"><canvas id="forecast-tokens-chart"></canvas></div>
+      <div class="glass-card p-4" style="height:280px"><canvas id="forecast-storage-chart"></canvas></div>
+    </div>
+    <div id="forecast-kpis" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3"></div>
+  </section>
+
+  <!-- ============================== SECTION 14: LIVE ACTIVITY FEED ============================== -->
+  <section id="live-activity" class="glass-panel p-4">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-bold">14. Live Activity Feed</h2>
+      <span class="pill pill-green"><span class="blink-dot mr-1"></span>Streaming</span>
+    </div>
+    <div id="activity-feed-list" class="space-y-2 max-h-[420px] overflow-y-auto scroll-thin"></div>
+  </section>
+
+  <footer class="text-center text-[11px] text-slate-500 py-6">
+    AI OpsCenter · Enterprise AI Operations Platform · FinOps · AIOps · LLMOps · Governance · Resource Management · Chargeback
+  </footer>
+</main>
+
+<!-- ============================== MODAL: VECTOR DB COLLECTION DETAIL ============================== -->
+<div id="vector-modal" class="modal-overlay hidden">
+  <div class="modal-panel p-6" id="vector-modal-content"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

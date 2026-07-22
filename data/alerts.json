@@ -1,0 +1,12 @@
+[
+  { "id": "al1", "alert_type": "Budget Exceeded", "severity": "Critical", "message": "Support department exceeded 94% of monthly budget", "source": "Support Dept", "alert_time": "2026-07-22T08:12:00Z", "status": "Open" },
+  { "id": "al2", "alert_type": "High GPU Usage", "severity": "High", "message": "AWS GPU pool at 93% utilization for 4h", "source": "AWS GPU", "alert_time": "2026-07-22T07:40:00Z", "status": "Acknowledged" },
+  { "id": "al3", "alert_type": "Vector DB Full", "severity": "High", "message": "Pinecone allocated storage at 82% capacity", "source": "Pinecone", "alert_time": "2026-07-21T22:10:00Z", "status": "Open" },
+  { "id": "al4", "alert_type": "Prompt Explosion", "severity": "Medium", "message": "Avg prompt length up 38% for Support Copilot", "source": "Support Copilot", "alert_time": "2026-07-21T19:05:00Z", "status": "Open" },
+  { "id": "al5", "alert_type": "Agent Loop", "severity": "Critical", "message": "DevOps Bot detected in retry loop, 340 retries in 10 min", "source": "DevOps Bot", "alert_time": "2026-07-22T06:55:00Z", "status": "Open" },
+  { "id": "al6", "alert_type": "High Retry Rate", "severity": "Medium", "message": "OpenAI API retry rate up to 4.1k/day", "source": "OpenAI API", "alert_time": "2026-07-21T15:30:00Z", "status": "Resolved" },
+  { "id": "al7", "alert_type": "LLM Down", "severity": "Critical", "message": "Claude 3 Opus endpoint intermittent 503s", "source": "Claude API", "alert_time": "2026-07-20T13:20:00Z", "status": "Resolved" },
+  { "id": "al8", "alert_type": "Cloud Failure", "severity": "High", "message": "Azure Load Balancer degraded in us-east", "source": "Azure", "alert_time": "2026-07-20T09:45:00Z", "status": "Resolved" },
+  { "id": "al9", "alert_type": "Storage Full", "severity": "Medium", "message": "Postgres storage at 74% of allocation", "source": "Postgres", "alert_time": "2026-07-19T11:00:00Z", "status": "Acknowledged" },
+  { "id": "al10", "alert_type": "Employee Near Budget", "severity": "Low", "message": "14 employees within 90% of monthly budget", "source": "Employee Monitor", "alert_time": "2026-07-22T05:00:00Z", "status": "Open" }
+]
