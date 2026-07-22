@@ -26,10 +26,69 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderForecast();
   renderActivityFeed();
   simulateLiveUpdates();
+  initCategorySidebar();
 });
+
+function initCategorySidebar() {
+  const links = document.querySelectorAll('.sidebar .side-link');
+  
+  const params = new URLSearchParams(window.location.search);
+  const initialCat = params.get('cat') || 'overview';
+  activateCategory(initialCat);
+
+  links.forEach(link => {
+    const navVal = link.dataset.nav;
+    if (navVal && navVal.startsWith('cat-')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cat = navVal.replace('cat-', '');
+        window.history.pushState(null, '', `index.html?cat=${cat}`);
+        activateCategory(cat);
+      });
+    }
+  });
+
+  window.addEventListener('popstate', () => {
+    const p = new URLSearchParams(window.location.search);
+    const cat = p.get('cat') || 'overview';
+    activateCategory(cat);
+  });
+}
+
+function activateCategory(cat) {
+  document.querySelectorAll('.sidebar .side-link').forEach(l => {
+    if (l.dataset.nav === `cat-${cat}`) {
+      l.classList.add('active');
+    } else {
+      l.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('.cat-section').forEach(sec => {
+    if (sec.id === `cat-${cat}`) {
+      sec.classList.remove('hidden');
+    } else {
+      sec.classList.add('hidden');
+    }
+  });
+
+  const breadcrumb = document.getElementById('breadcrumb-category');
+  if (breadcrumb) {
+    const formatMap = {
+      'overview': 'Overview',
+      'llm': 'LLM Provider',
+      'rag': 'RAG Space',
+      'infra': 'Infrastructure',
+      'teams': 'Teams & Agents',
+      'forecast': 'Spend Forecasts'
+    };
+    breadcrumb.textContent = formatMap[cat] || cat;
+  }
+}
 
 function startClock() {
   const clockEl = document.getElementById('clock-time');
+  if (!clockEl) return;
   function tick() {
     clockEl.textContent = new Date().toLocaleTimeString('en-US', { hour12: false });
   }
@@ -461,13 +520,13 @@ function renderForecast() {
 function makeLineChart(canvasId, label, labels, data, color) {
   new Chart(document.getElementById(canvasId), {
     type: 'line',
-    data: { labels, datasets: [{ label, data, borderColor: color, backgroundColor: color + '22', fill: true, tension: 0.35, pointRadius: 3 }] },
+    data: { labels, datasets: [{ label, data, borderColor: color, backgroundColor: color + '15', fill: true, tension: 0.35, pointRadius: 3 }] },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, title: { display: true, text: label, color: '#8b96ac', font: { size: 11 } } },
+      plugins: { legend: { display: false }, title: { display: true, text: label, color: '#334155', font: { size: 11, weight: 'bold' } } },
       scales: {
-        x: { ticks: { color: '#8b96ac', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-        y: { ticks: { color: '#8b96ac', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+        x: { ticks: { color: '#475569', font: { size: 10 } }, grid: { color: '#e2e8f0' } },
+        y: { ticks: { color: '#475569', font: { size: 10 } }, grid: { color: '#e2e8f0' } }
       }
     }
   });

@@ -8,6 +8,8 @@ const agentPool = ['Support Copilot','Code Agent','Finance Analyst Bot','HR Assi
 const modelColors = { 'GPT-5':'#22d3ee','GPT-4o':'#3b82f6','Claude 3.7 Sonnet':'#8b5cf6','Claude 3 Opus':'#a78bfa','Gemini 2.5 Pro':'#22c55e','Gemini 2.0 Flash':'#4ade80','Llama 3.1 70B':'#f59e0b','Mistral Large':'#f97316','DeepSeek V3':'#ef4444' };
 
 document.addEventListener('DOMContentLoaded', async () => {
+  const portalLink = document.getElementById('link-employee-portal');
+  if (portalLink) portalLink.classList.add('active');
   await loadEmpData();
   populateEmployeeSelector();
   selectEmployee(EMP_STATE.employees[0].id);
@@ -155,7 +157,7 @@ function renderMyModels() {
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'right', labels: { color: '#dbe1ee', font: { size: 11 } } } }
+      plugins: { legend: { position: 'right', labels: { color: '#475569', font: { size: 11 } } } }
     }
   });
 }
@@ -175,7 +177,7 @@ function renderPromptAnalytics() {
     { label: 'Cache Hit Rate', value: fmtPct(cacheHit) },
   ];
   document.getElementById('prompt-analytics-grid').innerHTML = items.map(i => `
-    <div class="glass-card p-3"><p class="section-title mb-1">${i.label}</p><p class="text-base font-bold font-mono-num">${i.value}</p></div>`).join('');
+    <div class="glass-card p-3"><p class="section-title mb-1">${i.label}</p><p class="text-base font-bold font-mono-num text-slate-800">${i.value}</p></div>`).join('');
 }
 
 /* ============================== 6. RESOURCE USAGE ============================== */
@@ -190,7 +192,7 @@ function renderResourceUsage() {
     { label: 'Knowledge Uploads', value: fmtInt(Math.round(rndRange(e.id, 11, 1, 20))) },
   ];
   document.getElementById('resource-usage-grid').innerHTML = items.map(i => `
-    <div class="glass-card p-3"><p class="section-title mb-1">${i.label}</p><p class="text-base font-bold font-mono-num">${i.value}</p></div>`).join('');
+    <div class="glass-card p-3"><p class="section-title mb-1">${i.label}</p><p class="text-base font-bold font-mono-num text-slate-800">${i.value}</p></div>`).join('');
 }
 
 /* ============================== 7. BUDGET ============================== */
@@ -210,7 +212,7 @@ function renderBudget() {
     { label: 'Consumed', value: fmtUSDFull(e.consumed_budget) },
     { label: 'Remaining', value: fmtUSDFull(e.remaining_budget) },
     { label: 'Forecast Until Reset', value: fmtUSD(forecastUntilReset) },
-  ].map(k => `<div class="glass-card p-3"><p class="section-title mb-1">${k.label}</p><p class="text-base font-bold font-mono-num">${k.value}</p></div>`).join('');
+  ].map(k => `<div class="glass-card p-3"><p class="section-title mb-1">${k.label}</p><p class="text-base font-bold font-mono-num text-slate-800">${k.value}</p></div>`).join('');
 
   const labels = Array.from({length: 14}, (_, i) => `Day ${i+1}`);
   const trend = labels.map((_, i) => Math.round((e.consumed_budget / 14) * (i + 1) * rndRange(e.id, 100 + i, 0.85, 1.15)));
@@ -218,10 +220,10 @@ function renderBudget() {
   if (window.__budgetChart) window.__budgetChart.destroy();
   window.__budgetChart = new Chart(ctx, {
     type: 'line',
-    data: { labels, datasets: [{ label: 'Cumulative Spend ($)', data: trend, borderColor: '#3b82f6', backgroundColor: '#3b82f622', fill: true, tension: 0.35, pointRadius: 2 }] },
+    data: { labels, datasets: [{ label: 'Cumulative Spend ($)', data: trend, borderColor: '#2563eb', backgroundColor: '#2563eb11', fill: true, tension: 0.35, pointRadius: 2 }] },
     options: { responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
-      scales: { x: { ticks: { color: '#8b96ac', font: { size: 9 } }, grid: { display: false } }, y: { ticks: { color: '#8b96ac', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } } } }
+      scales: { x: { ticks: { color: '#475569', font: { size: 9 } }, grid: { display: false } }, y: { ticks: { color: '#475569', font: { size: 10 } }, grid: { color: '#e2e8f0' } } } }
   });
 }
 
@@ -237,8 +239,8 @@ function renderRecommendations() {
   ];
   document.getElementById('recommendations-list').innerHTML = all.filter(r => r.show).map(r => `
     <div class="glass-card p-3 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0"><i class="fa-solid ${r.icon} text-amber-400"></i></div>
-      <p class="text-sm text-slate-300">${r.text}</p>
+      <div class="w-9 h-9 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0"><i class="fa-solid ${r.icon} text-amber-600"></i></div>
+      <p class="text-sm text-slate-700 font-medium">${r.text}</p>
     </div>`).join('');
 }
 
@@ -249,9 +251,9 @@ function initRequestButtons() {
 function openRequestModal(type) {
   const modal = document.getElementById('request-modal');
   modal.querySelector('#request-modal-content').innerHTML = `
-    <div class="flex items-center justify-between mb-4"><h3 class="text-base font-bold">Request: ${type}</h3><button onclick="closeRequestModal()" class="btn-ghost"><i class="fa-solid fa-xmark"></i></button></div>
-    <label class="text-xs text-slate-400 block mb-1">Details / Justification</label>
-    <textarea id="req-details" rows="4" class="w-full mb-4" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:8px 12px; color:#e7ebf3; font-size:0.82rem;" placeholder="Explain why you need this..."></textarea>
+    <div class="flex items-center justify-between mb-4"><h3 class="text-base font-bold text-slate-900">Request: ${type}</h3><button onclick="closeRequestModal()" class="btn-ghost"><i class="fa-solid fa-xmark"></i></button></div>
+    <label class="text-xs text-slate-500 block mb-1">Details / Justification</label>
+    <textarea id="req-details" rows="4" class="w-full mb-4" style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:8px 12px; color:#0f172a; font-size:0.82rem;" placeholder="Explain why you need this..."></textarea>
     <div class="flex justify-end gap-2"><button class="btn-ghost" onclick="closeRequestModal()">Cancel</button><button class="btn-primary" onclick="submitRequest('${type}')">Submit Request</button></div>`;
   modal.classList.remove('hidden');
 }

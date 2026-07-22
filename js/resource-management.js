@@ -21,14 +21,52 @@ async function loadRMData() {
 }
 
 function initTabs() {
-  qsa('#page-tabs button').forEach(btn => {
-    btn.onclick = () => {
-      qsa('#page-tabs button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      qsa('main section[id^="tab-"]').forEach(s => s.classList.add('hidden'));
-      document.getElementById('tab-' + btn.dataset.tab).classList.remove('hidden');
-    };
+  const links = document.querySelectorAll('.sidebar .side-link');
+  
+  const params = new URLSearchParams(window.location.search);
+  const initialTab = params.get('tab') || 'agents';
+  activateTab(initialTab);
+
+  links.forEach(link => {
+    const navVal = link.dataset.nav;
+    if (navVal && navVal.startsWith('tab-')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tab = navVal.replace('tab-', '');
+        window.history.pushState(null, '', `resource-management.html?tab=${tab}`);
+        activateTab(tab);
+      });
+    }
   });
+
+  window.addEventListener('popstate', () => {
+    const p = new URLSearchParams(window.location.search);
+    const tab = p.get('tab') || 'agents';
+    activateTab(tab);
+  });
+}
+
+function activateTab(tab) {
+  document.querySelectorAll('.sidebar .side-link').forEach(l => {
+    if (l.dataset.nav === `tab-${tab}`) {
+      l.classList.add('active');
+    } else {
+      l.classList.remove('active');
+    }
+  });
+
+  document.querySelectorAll('main section[id^="tab-"]').forEach(s => {
+    if (s.id === `tab-${tab}`) {
+      s.classList.remove('hidden');
+    } else {
+      s.classList.add('hidden');
+    }
+  });
+
+  const breadcrumb = document.getElementById('breadcrumb-tab');
+  if (breadcrumb) {
+    breadcrumb.textContent = tab === 'agents' ? 'Agent Inventory' : 'Employee Admin';
+  }
 }
 
 /* ============================== AGENT INVENTORY ============================== */
