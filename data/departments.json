@@ -1,42 +1,115 @@
 [
   {
-    "id": "dep1", "name": "Engineering", "allocated_budget": 150000, "consumed_budget": 128400, "remaining_budget": 21600,
-    "allocated_tokens": 3200000000, "consumed_tokens": 2840000000, "avg_cost": 45.2,
-    "top_models": ["GPT-5", "Claude 3.7 Sonnet", "DeepSeek V3"],
-    "top_agents": ["Code Agent", "DevOps Bot"],
-    "top_employees": ["T. Nguyen", "K. Brown", "L. Wei"],
+    "id": "dep1",
+    "name": "Engineering",
+    "allocated_budget": 150000,
+    "consumed_budget": 128400,
+    "remaining_budget": 21600,
+    "allocated_tokens": 3200000000,
+    "consumed_tokens": 3274244000,
+    "avg_cost": 45.2,
+    "top_models": [
+      "GPT-5",
+      "Claude 3.7 Sonnet",
+      "DeepSeek V3"
+    ],
+    "top_agents": [
+      "Code Agent",
+      "DevOps Bot"
+    ],
+    "top_employees": [
+      "T. Nguyen",
+      "K. Brown",
+      "L. Wei"
+    ],
     "forecast": 142000
   },
   {
-    "id": "dep2", "name": "HR", "allocated_budget": 40000, "consumed_budget": 31200, "remaining_budget": 8800,
-    "allocated_tokens": 620000000, "consumed_tokens": 498000000, "avg_cost": 18.4,
-    "top_models": ["GPT-4o", "Gemini 2.0 Flash"],
-    "top_agents": ["HR Assistant"],
-    "top_employees": ["S. Kim", "P. Adams"],
+    "id": "dep2",
+    "name": "HR",
+    "allocated_budget": 40000,
+    "consumed_budget": 31200,
+    "remaining_budget": 8800,
+    "allocated_tokens": 620000000,
+    "consumed_tokens": 230450000,
+    "avg_cost": 18.4,
+    "top_models": [
+      "GPT-4o",
+      "Gemini 2.0 Flash"
+    ],
+    "top_agents": [
+      "HR Assistant"
+    ],
+    "top_employees": [
+      "S. Kim",
+      "P. Adams"
+    ],
     "forecast": 34600
   },
   {
-    "id": "dep3", "name": "Finance", "allocated_budget": 60000, "consumed_budget": 52800, "remaining_budget": 7200,
-    "allocated_tokens": 840000000, "consumed_tokens": 760000000, "avg_cost": 29.6,
-    "top_models": ["Claude 3 Opus", "GPT-5"],
-    "top_agents": ["Finance Analyst Bot"],
-    "top_employees": ["R. Patel", "N. Ivanov"],
+    "id": "dep3",
+    "name": "Finance",
+    "allocated_budget": 60000,
+    "consumed_budget": 52800,
+    "remaining_budget": 7200,
+    "allocated_tokens": 840000000,
+    "consumed_tokens": 471294000,
+    "avg_cost": 29.6,
+    "top_models": [
+      "Claude 3 Opus",
+      "GPT-5"
+    ],
+    "top_agents": [
+      "Finance Analyst Bot"
+    ],
+    "top_employees": [
+      "R. Patel",
+      "N. Ivanov"
+    ],
     "forecast": 58200
   },
   {
-    "id": "dep4", "name": "Support", "allocated_budget": 90000, "consumed_budget": 84600, "remaining_budget": 5400,
-    "allocated_tokens": 1600000000, "consumed_tokens": 1520000000, "avg_cost": 22.1,
-    "top_models": ["GPT-4o", "Gemini 2.0 Flash"],
-    "top_agents": ["Support Copilot"],
-    "top_employees": ["A. Sharma", "J. Costa"],
+    "id": "dep4",
+    "name": "Support",
+    "allocated_budget": 90000,
+    "consumed_budget": 84600,
+    "remaining_budget": 5400,
+    "allocated_tokens": 1600000000,
+    "consumed_tokens": 1514268000,
+    "avg_cost": 22.1,
+    "top_models": [
+      "GPT-4o",
+      "Gemini 2.0 Flash"
+    ],
+    "top_agents": [
+      "Support Copilot"
+    ],
+    "top_employees": [
+      "A. Sharma",
+      "J. Costa"
+    ],
     "forecast": 92800
   },
   {
-    "id": "dep5", "name": "Marketing", "allocated_budget": 50000, "consumed_budget": 38900, "remaining_budget": 11100,
-    "allocated_tokens": 720000000, "consumed_tokens": 610000000, "avg_cost": 16.8,
-    "top_models": ["Gemini 2.5 Pro", "Mistral Large"],
-    "top_agents": ["Marketing Content Bot"],
-    "top_employees": ["D. Ortiz", "M. Chen"],
+    "id": "dep5",
+    "name": "Marketing",
+    "allocated_budget": 50000,
+    "consumed_budget": 38900,
+    "remaining_budget": 11100,
+    "allocated_tokens": 720000000,
+    "consumed_tokens": 390824000,
+    "avg_cost": 16.8,
+    "top_models": [
+      "Gemini 2.5 Pro",
+      "Mistral Large"
+    ],
+    "top_agents": [
+      "Marketing Content Bot"
+    ],
+    "top_employees": [
+      "D. Ortiz",
+      "M. Chen"
+    ],
     "forecast": 43100
   }
 ]

@@ -1,74 +1,357 @@
 [
   {
-    "id": "emp1", "employee_name": "A. Sharma", "employee_code": "EMP-1042", "department": "Support", "manager": "J. Costa", "role": "Support Engineer", "status": "Active",
-    "allocated_daily_tokens": 50000, "allocated_monthly_tokens": 1200000, "allocated_budget": 500, "consumed_daily_tokens": 38400, "consumed_monthly_tokens": 1080000, "consumed_budget": 462, "remaining_budget": 38,
-    "allowed_models": ["GPT-4o", "Gemini 2.0 Flash"], "allowed_agents": ["Support Copilot"], "restricted_models": ["Claude 3 Opus"], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 42
+    "id": "emp1",
+    "employee_name": "A. Sharma",
+    "employee_code": "EMP-1042",
+    "department": "Support",
+    "manager": "J. Costa",
+    "role": "Support Engineer",
+    "status": "Active",
+    "allocated_daily_tokens": 50000,
+    "allocated_monthly_tokens": 1200000,
+    "allocated_budget": 500,
+    "consumed_daily_tokens": 38400,
+    "consumed_monthly_tokens": 1080000,
+    "consumed_budget": 462,
+    "remaining_budget": 38,
+    "allowed_models": [
+      "GPT-4o",
+      "Gemini 2.0 Flash"
+    ],
+    "allowed_agents": [
+      "Support Copilot"
+    ],
+    "restricted_models": [
+      "Claude 3 Opus"
+    ],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 42
   },
   {
-    "id": "emp2", "employee_name": "T. Nguyen", "employee_code": "EMP-1088", "department": "Engineering", "manager": "L. Wei", "role": "Senior Engineer", "status": "Active",
-    "allocated_daily_tokens": 80000, "allocated_monthly_tokens": 2000000, "allocated_budget": 900, "consumed_daily_tokens": 61200, "consumed_monthly_tokens": 1740000, "consumed_budget": 812, "remaining_budget": 88,
-    "allowed_models": ["GPT-5", "Claude 3.7 Sonnet", "DeepSeek V3"], "allowed_agents": ["Code Agent", "DevOps Bot"], "restricted_models": [], "priority_level": "Critical",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 68
+    "id": "emp2",
+    "employee_name": "T. Nguyen",
+    "employee_code": "EMP-1088",
+    "department": "Engineering",
+    "manager": "L. Wei",
+    "role": "Senior Engineer",
+    "status": "Active",
+    "allocated_daily_tokens": 80000,
+    "allocated_monthly_tokens": 2000000,
+    "allocated_budget": 900,
+    "consumed_daily_tokens": 61200,
+    "consumed_monthly_tokens": 1740000,
+    "consumed_budget": 812,
+    "remaining_budget": 88,
+    "allowed_models": [
+      "GPT-5",
+      "Claude 3.7 Sonnet",
+      "DeepSeek V3"
+    ],
+    "allowed_agents": [
+      "Code Agent",
+      "DevOps Bot"
+    ],
+    "restricted_models": [],
+    "priority_level": "Critical",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 68
   },
   {
-    "id": "emp3", "employee_name": "R. Patel", "employee_code": "EMP-1103", "department": "Finance", "manager": "N. Ivanov", "role": "Financial Analyst", "status": "Near Limit",
-    "allocated_daily_tokens": 40000, "allocated_monthly_tokens": 900000, "allocated_budget": 600, "consumed_daily_tokens": 37200, "consumed_monthly_tokens": 846000, "consumed_budget": 564, "remaining_budget": 36,
-    "allowed_models": ["Claude 3 Opus", "GPT-5"], "allowed_agents": ["Finance Analyst Bot"], "restricted_models": ["Llama 3.1 70B"], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 31
+    "id": "emp3",
+    "employee_name": "R. Patel",
+    "employee_code": "EMP-1103",
+    "department": "Finance",
+    "manager": "N. Ivanov",
+    "role": "Financial Analyst",
+    "status": "Near Limit",
+    "allocated_daily_tokens": 40000,
+    "allocated_monthly_tokens": 900000,
+    "allocated_budget": 600,
+    "consumed_daily_tokens": 37200,
+    "consumed_monthly_tokens": 846000,
+    "consumed_budget": 564,
+    "remaining_budget": 36,
+    "allowed_models": [
+      "Claude 3 Opus",
+      "GPT-5"
+    ],
+    "allowed_agents": [
+      "Finance Analyst Bot"
+    ],
+    "restricted_models": [
+      "Llama 3.1 70B"
+    ],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 31
   },
   {
-    "id": "emp4", "employee_name": "S. Kim", "employee_code": "EMP-1120", "department": "HR", "manager": "P. Adams", "role": "HR Specialist", "status": "Active",
-    "allocated_daily_tokens": 20000, "allocated_monthly_tokens": 450000, "allocated_budget": 300, "consumed_daily_tokens": 12400, "consumed_monthly_tokens": 298000, "consumed_budget": 184, "remaining_budget": 116,
-    "allowed_models": ["GPT-4o", "Gemini 2.0 Flash"], "allowed_agents": ["HR Assistant"], "restricted_models": ["GPT-5"], "priority_level": "Medium",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 19
+    "id": "emp4",
+    "employee_name": "S. Kim",
+    "employee_code": "EMP-1120",
+    "department": "HR",
+    "manager": "P. Adams",
+    "role": "HR Specialist",
+    "status": "Active",
+    "allocated_daily_tokens": 20000,
+    "allocated_monthly_tokens": 450000,
+    "allocated_budget": 300,
+    "consumed_daily_tokens": 12400,
+    "consumed_monthly_tokens": 298000,
+    "consumed_budget": 184,
+    "remaining_budget": 116,
+    "allowed_models": [
+      "GPT-4o",
+      "Gemini 2.0 Flash"
+    ],
+    "allowed_agents": [
+      "HR Assistant"
+    ],
+    "restricted_models": [
+      "GPT-5"
+    ],
+    "priority_level": "Medium",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 19
   },
   {
-    "id": "emp5", "employee_name": "D. Ortiz", "employee_code": "EMP-1155", "department": "Marketing", "manager": "M. Chen", "role": "Content Strategist", "status": "Active",
-    "allocated_daily_tokens": 30000, "allocated_monthly_tokens": 700000, "allocated_budget": 400, "consumed_daily_tokens": 21800, "consumed_monthly_tokens": 512000, "consumed_budget": 298, "remaining_budget": 102,
-    "allowed_models": ["Gemini 2.5 Pro", "Mistral Large"], "allowed_agents": ["Marketing Content Bot"], "restricted_models": [], "priority_level": "Medium",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 24
+    "id": "emp5",
+    "employee_name": "D. Ortiz",
+    "employee_code": "EMP-1155",
+    "department": "Marketing",
+    "manager": "M. Chen",
+    "role": "Content Strategist",
+    "status": "Active",
+    "allocated_daily_tokens": 30000,
+    "allocated_monthly_tokens": 700000,
+    "allocated_budget": 400,
+    "consumed_daily_tokens": 21800,
+    "consumed_monthly_tokens": 512000,
+    "consumed_budget": 298,
+    "remaining_budget": 102,
+    "allowed_models": [
+      "Gemini 2.5 Pro",
+      "Mistral Large"
+    ],
+    "allowed_agents": [
+      "Marketing Content Bot"
+    ],
+    "restricted_models": [],
+    "priority_level": "Medium",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 24
   },
   {
-    "id": "emp6", "employee_name": "K. Brown", "employee_code": "EMP-1177", "department": "Engineering", "manager": "L. Wei", "role": "DevOps Engineer", "status": "Exceeded",
-    "allocated_daily_tokens": 60000, "allocated_monthly_tokens": 1400000, "allocated_budget": 700, "consumed_daily_tokens": 68400, "consumed_monthly_tokens": 1462000, "consumed_budget": 738, "remaining_budget": -38,
-    "allowed_models": ["DeepSeek V3", "GPT-5"], "allowed_agents": ["DevOps Bot"], "restricted_models": [], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 55
+    "id": "emp6",
+    "employee_name": "K. Brown",
+    "employee_code": "EMP-1177",
+    "department": "Engineering",
+    "manager": "L. Wei",
+    "role": "DevOps Engineer",
+    "status": "Exceeded",
+    "allocated_daily_tokens": 60000,
+    "allocated_monthly_tokens": 1400000,
+    "allocated_budget": 700,
+    "consumed_daily_tokens": 68400,
+    "consumed_monthly_tokens": 1462000,
+    "consumed_budget": 738,
+    "remaining_budget": -38,
+    "allowed_models": [
+      "DeepSeek V3",
+      "GPT-5"
+    ],
+    "allowed_agents": [
+      "DevOps Bot"
+    ],
+    "restricted_models": [],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 55
   },
   {
-    "id": "emp7", "employee_name": "J. Lee", "employee_code": "EMP-1201", "department": "Engineering", "manager": "L. Wei", "role": "Research Scientist", "status": "Active",
-    "allocated_daily_tokens": 45000, "allocated_monthly_tokens": 1000000, "allocated_budget": 550, "consumed_daily_tokens": 28600, "consumed_monthly_tokens": 640000, "consumed_budget": 340, "remaining_budget": 210,
-    "allowed_models": ["Gemini 2.5 Pro"], "allowed_agents": ["Research Assistant"], "restricted_models": [], "priority_level": "Medium",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 27
+    "id": "emp7",
+    "employee_name": "J. Lee",
+    "employee_code": "EMP-1201",
+    "department": "Engineering",
+    "manager": "L. Wei",
+    "role": "Research Scientist",
+    "status": "Active",
+    "allocated_daily_tokens": 45000,
+    "allocated_monthly_tokens": 1000000,
+    "allocated_budget": 550,
+    "consumed_daily_tokens": 28600,
+    "consumed_monthly_tokens": 640000,
+    "consumed_budget": 340,
+    "remaining_budget": 210,
+    "allowed_models": [
+      "Gemini 2.5 Pro"
+    ],
+    "allowed_agents": [
+      "Research Assistant"
+    ],
+    "restricted_models": [],
+    "priority_level": "Medium",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 27
   },
   {
-    "id": "emp8", "employee_name": "M. Chen", "employee_code": "EMP-1233", "department": "Marketing", "manager": "P. Adams", "role": "Marketing Manager", "status": "Active",
-    "allocated_daily_tokens": 25000, "allocated_monthly_tokens": 550000, "allocated_budget": 350, "consumed_daily_tokens": 14200, "consumed_monthly_tokens": 312000, "consumed_budget": 178, "remaining_budget": 172,
-    "allowed_models": ["GPT-4o"], "allowed_agents": ["Sales RAG Bot"], "restricted_models": [], "priority_level": "Low",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 12
+    "id": "emp8",
+    "employee_name": "M. Chen",
+    "employee_code": "EMP-1233",
+    "department": "Marketing",
+    "manager": "P. Adams",
+    "role": "Marketing Manager",
+    "status": "Active",
+    "allocated_daily_tokens": 25000,
+    "allocated_monthly_tokens": 550000,
+    "allocated_budget": 350,
+    "consumed_daily_tokens": 14200,
+    "consumed_monthly_tokens": 312000,
+    "consumed_budget": 178,
+    "remaining_budget": 172,
+    "allowed_models": [
+      "GPT-4o"
+    ],
+    "allowed_agents": [
+      "Sales RAG Bot"
+    ],
+    "restricted_models": [],
+    "priority_level": "Low",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 12
   },
   {
-    "id": "emp9", "employee_name": "N. Ivanov", "employee_code": "EMP-1260", "department": "Finance", "manager": "R. Patel", "role": "Finance Director", "status": "Active",
-    "allocated_daily_tokens": 35000, "allocated_monthly_tokens": 800000, "allocated_budget": 550, "consumed_daily_tokens": 19800, "consumed_monthly_tokens": 448000, "consumed_budget": 296, "remaining_budget": 254,
-    "allowed_models": ["Claude 3 Opus", "Claude 3.7 Sonnet"], "allowed_agents": ["Finance Analyst Bot"], "restricted_models": [], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 21
+    "id": "emp9",
+    "employee_name": "N. Ivanov",
+    "employee_code": "EMP-1260",
+    "department": "Finance",
+    "manager": "R. Patel",
+    "role": "Finance Director",
+    "status": "Active",
+    "allocated_daily_tokens": 35000,
+    "allocated_monthly_tokens": 800000,
+    "allocated_budget": 550,
+    "consumed_daily_tokens": 19800,
+    "consumed_monthly_tokens": 448000,
+    "consumed_budget": 296,
+    "remaining_budget": 254,
+    "allowed_models": [
+      "Claude 3 Opus",
+      "Claude 3.7 Sonnet"
+    ],
+    "allowed_agents": [
+      "Finance Analyst Bot"
+    ],
+    "restricted_models": [],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 21
   },
   {
-    "id": "emp10", "employee_name": "P. Adams", "employee_code": "EMP-1289", "department": "HR", "manager": "S. Kim", "role": "HR Director", "status": "Active",
-    "allocated_daily_tokens": 20000, "allocated_monthly_tokens": 400000, "allocated_budget": 300, "consumed_daily_tokens": 8100, "consumed_monthly_tokens": 152000, "consumed_budget": 96, "remaining_budget": 204,
-    "allowed_models": ["GPT-4o"], "allowed_agents": ["HR Assistant"], "restricted_models": [], "priority_level": "Low",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 9
+    "id": "emp10",
+    "employee_name": "P. Adams",
+    "employee_code": "EMP-1289",
+    "department": "HR",
+    "manager": "S. Kim",
+    "role": "HR Director",
+    "status": "Active",
+    "allocated_daily_tokens": 20000,
+    "allocated_monthly_tokens": 400000,
+    "allocated_budget": 300,
+    "consumed_daily_tokens": 8100,
+    "consumed_monthly_tokens": 152000,
+    "consumed_budget": 96,
+    "remaining_budget": 204,
+    "allowed_models": [
+      "GPT-4o"
+    ],
+    "allowed_agents": [
+      "HR Assistant"
+    ],
+    "restricted_models": [],
+    "priority_level": "Low",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 9
   },
   {
-    "id": "emp11", "employee_name": "J. Costa", "employee_code": "EMP-1310", "department": "Support", "manager": "A. Sharma", "role": "Support Lead", "status": "Near Limit",
-    "allocated_daily_tokens": 55000, "allocated_monthly_tokens": 1250000, "allocated_budget": 520, "consumed_daily_tokens": 51200, "consumed_monthly_tokens": 1188000, "consumed_budget": 494, "remaining_budget": 26,
-    "allowed_models": ["GPT-4o", "Gemini 2.0 Flash"], "allowed_agents": ["Support Copilot"], "restricted_models": [], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 38
+    "id": "emp11",
+    "employee_name": "J. Costa",
+    "employee_code": "EMP-1310",
+    "department": "Support",
+    "manager": "A. Sharma",
+    "role": "Support Lead",
+    "status": "Near Limit",
+    "allocated_daily_tokens": 55000,
+    "allocated_monthly_tokens": 1250000,
+    "allocated_budget": 520,
+    "consumed_daily_tokens": 51200,
+    "consumed_monthly_tokens": 1188000,
+    "consumed_budget": 494,
+    "remaining_budget": 26,
+    "allowed_models": [
+      "GPT-4o",
+      "Gemini 2.0 Flash"
+    ],
+    "allowed_agents": [
+      "Support Copilot"
+    ],
+    "restricted_models": [],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 38
   },
   {
-    "id": "emp12", "employee_name": "L. Wei", "employee_code": "EMP-1345", "department": "Engineering", "manager": "CTO Office", "role": "Engineering Director", "status": "Active",
-    "allocated_daily_tokens": 40000, "allocated_monthly_tokens": 900000, "allocated_budget": 500, "consumed_daily_tokens": 18400, "consumed_monthly_tokens": 402000, "consumed_budget": 224, "remaining_budget": 276,
-    "allowed_models": ["GPT-5", "Claude 3.7 Sonnet"], "allowed_agents": ["Code Agent", "DevOps Bot", "Research Assistant"], "restricted_models": [], "priority_level": "High",
-    "daily_reset_time": "00:00 UTC", "budget_expiry": "2026-07-31T23:59:00Z", "approval_status": "Approved", "time_saved_hours": 15
+    "id": "emp12",
+    "employee_name": "L. Wei",
+    "employee_code": "EMP-1345",
+    "department": "Engineering",
+    "manager": "CTO Office",
+    "role": "Engineering Director",
+    "status": "Active",
+    "allocated_daily_tokens": 40000,
+    "allocated_monthly_tokens": 900000,
+    "allocated_budget": 500,
+    "consumed_daily_tokens": 18400,
+    "consumed_monthly_tokens": 402000,
+    "consumed_budget": 224,
+    "remaining_budget": 276,
+    "allowed_models": [
+      "GPT-5",
+      "Claude 3.7 Sonnet"
+    ],
+    "allowed_agents": [
+      "Code Agent",
+      "DevOps Bot",
+      "Research Assistant"
+    ],
+    "restricted_models": [],
+    "priority_level": "High",
+    "daily_reset_time": "00:00 UTC",
+    "budget_expiry": "2026-07-31T23:59:00Z",
+    "approval_status": "Approved",
+    "time_saved_hours": 15
   }
 ]

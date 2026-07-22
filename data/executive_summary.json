@@ -1,18 +1,18 @@
 [
   {
     "id": "exec1",
-    "total_spend_today": 18420,
-    "monthly_spend": 412300,
-    "monthly_budget": 500000,
-    "budget_remaining": 87700,
+    "total_spend_today": 19005,
+    "monthly_spend": 440800,
+    "monthly_budget": 503500,
+    "budget_remaining": 62700,
     "forecasted_month_end": 538900,
     "cost_diff_vs_last_month": 42100,
-    "total_employees_using_ai": 1284,
-    "total_active_agents": 96,
+    "total_employees_using_ai": 12,
+    "total_active_agents": 8,
     "total_requests": 2418900,
     "total_tokens_consumed": 8920000000,
-    "total_infra_cost": 156800,
-    "total_external_api_cost": 98650,
+    "total_infra_cost": 171650,
+    "total_external_api_cost": 16800,
     "overall_health_score": 87
   }
 ]

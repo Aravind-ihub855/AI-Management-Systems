@@ -1,18 +1,162 @@
 [
-  { "id": "c1", "category": "LLM Cost", "current_cost": 6120, "yesterday_cost": 5890, "monthly_cost": 152400, "budget": 180000, "utilization_pct": 84.7, "growth_pct": 3.9 },
-  { "id": "c2", "category": "Embedding Cost", "current_cost": 980, "yesterday_cost": 940, "monthly_cost": 21300, "budget": 25000, "utilization_pct": 85.2, "growth_pct": 4.3 },
-  { "id": "c3", "category": "Vector Database", "current_cost": 1420, "yesterday_cost": 1360, "monthly_cost": 31900, "budget": 35000, "utilization_pct": 91.1, "growth_pct": 4.4 },
-  { "id": "c4", "category": "Cloud Compute", "current_cost": 2870, "yesterday_cost": 2790, "monthly_cost": 64200, "budget": 70000, "utilization_pct": 91.7, "growth_pct": 2.9 },
-  { "id": "c5", "category": "GPU", "current_cost": 3960, "yesterday_cost": 3810, "monthly_cost": 88700, "budget": 95000, "utilization_pct": 93.4, "growth_pct": 3.9 },
-  { "id": "c6", "category": "CPU", "current_cost": 610, "yesterday_cost": 600, "monthly_cost": 13800, "budget": 16000, "utilization_pct": 86.3, "growth_pct": 1.7 },
-  { "id": "c7", "category": "Storage", "current_cost": 420, "yesterday_cost": 410, "monthly_cost": 9600, "budget": 12000, "utilization_pct": 80.0, "growth_pct": 2.4 },
-  { "id": "c8", "category": "Redis Cache", "current_cost": 180, "yesterday_cost": 175, "monthly_cost": 4100, "budget": 5000, "utilization_pct": 82.0, "growth_pct": 2.9 },
-  { "id": "c9", "category": "Hosting", "current_cost": 260, "yesterday_cost": 255, "monthly_cost": 5900, "budget": 7000, "utilization_pct": 84.3, "growth_pct": 2.0 },
-  { "id": "c10", "category": "Bandwidth", "current_cost": 340, "yesterday_cost": 320, "monthly_cost": 7600, "budget": 9000, "utilization_pct": 84.4, "growth_pct": 6.3 },
-  { "id": "c11", "category": "Database", "current_cost": 510, "yesterday_cost": 495, "monthly_cost": 11400, "budget": 13000, "utilization_pct": 87.7, "growth_pct": 3.0 },
-  { "id": "c12", "category": "External APIs", "current_cost": 740, "yesterday_cost": 700, "monthly_cost": 16800, "budget": 20000, "utilization_pct": 84.0, "growth_pct": 5.7 },
-  { "id": "c13", "category": "OCR", "current_cost": 95, "yesterday_cost": 90, "monthly_cost": 2100, "budget": 3000, "utilization_pct": 70.0, "growth_pct": 5.6 },
-  { "id": "c14", "category": "Speech APIs", "current_cost": 150, "yesterday_cost": 142, "monthly_cost": 3300, "budget": 4000, "utilization_pct": 82.5, "growth_pct": 5.6 },
-  { "id": "c15", "category": "Image Generation", "current_cost": 220, "yesterday_cost": 205, "monthly_cost": 4800, "budget": 6000, "utilization_pct": 80.0, "growth_pct": 7.3 },
-  { "id": "c16", "category": "Monitoring Tools", "current_cost": 130, "yesterday_cost": 128, "monthly_cost": 2900, "budget": 3500, "utilization_pct": 82.9, "growth_pct": 1.6 }
+  {
+    "id": "c1",
+    "category": "LLM Cost",
+    "current_cost": 6120,
+    "yesterday_cost": 5890,
+    "monthly_cost": 152400,
+    "budget": 180000,
+    "utilization_pct": 84.7,
+    "growth_pct": 3.9
+  },
+  {
+    "id": "c2",
+    "category": "Embedding Cost",
+    "current_cost": 980,
+    "yesterday_cost": 940,
+    "monthly_cost": 21300,
+    "budget": 25000,
+    "utilization_pct": 85.2,
+    "growth_pct": 4.3
+  },
+  {
+    "id": "c3",
+    "category": "Vector Database",
+    "current_cost": 1420,
+    "yesterday_cost": 1360,
+    "monthly_cost": 31900,
+    "budget": 35000,
+    "utilization_pct": 91.1,
+    "growth_pct": 4.4
+  },
+  {
+    "id": "c4",
+    "category": "Cloud Compute",
+    "current_cost": 2870,
+    "yesterday_cost": 2790,
+    "monthly_cost": 64200,
+    "budget": 70000,
+    "utilization_pct": 91.7,
+    "growth_pct": 2.9
+  },
+  {
+    "id": "c5",
+    "category": "GPU",
+    "current_cost": 3960,
+    "yesterday_cost": 3810,
+    "monthly_cost": 88700,
+    "budget": 95000,
+    "utilization_pct": 93.4,
+    "growth_pct": 3.9
+  },
+  {
+    "id": "c6",
+    "category": "CPU",
+    "current_cost": 610,
+    "yesterday_cost": 600,
+    "monthly_cost": 13800,
+    "budget": 16000,
+    "utilization_pct": 86.3,
+    "growth_pct": 1.7
+  },
+  {
+    "id": "c7",
+    "category": "Storage",
+    "current_cost": 420,
+    "yesterday_cost": 410,
+    "monthly_cost": 9600,
+    "budget": 12000,
+    "utilization_pct": 80,
+    "growth_pct": 2.4
+  },
+  {
+    "id": "c8",
+    "category": "Redis Cache",
+    "current_cost": 180,
+    "yesterday_cost": 175,
+    "monthly_cost": 4100,
+    "budget": 5000,
+    "utilization_pct": 82,
+    "growth_pct": 2.9
+  },
+  {
+    "id": "c9",
+    "category": "Hosting",
+    "current_cost": 260,
+    "yesterday_cost": 255,
+    "monthly_cost": 5900,
+    "budget": 7000,
+    "utilization_pct": 84.3,
+    "growth_pct": 2
+  },
+  {
+    "id": "c10",
+    "category": "Bandwidth",
+    "current_cost": 340,
+    "yesterday_cost": 320,
+    "monthly_cost": 7600,
+    "budget": 9000,
+    "utilization_pct": 84.4,
+    "growth_pct": 6.3
+  },
+  {
+    "id": "c11",
+    "category": "Database",
+    "current_cost": 510,
+    "yesterday_cost": 495,
+    "monthly_cost": 11400,
+    "budget": 13000,
+    "utilization_pct": 87.7,
+    "growth_pct": 3
+  },
+  {
+    "id": "c12",
+    "category": "External APIs",
+    "current_cost": 740,
+    "yesterday_cost": 700,
+    "monthly_cost": 16800,
+    "budget": 20000,
+    "utilization_pct": 84,
+    "growth_pct": 5.7
+  },
+  {
+    "id": "c13",
+    "category": "OCR",
+    "current_cost": 95,
+    "yesterday_cost": 90,
+    "monthly_cost": 2100,
+    "budget": 3000,
+    "utilization_pct": 70,
+    "growth_pct": 5.6
+  },
+  {
+    "id": "c14",
+    "category": "Speech APIs",
+    "current_cost": 150,
+    "yesterday_cost": 142,
+    "monthly_cost": 3300,
+    "budget": 4000,
+    "utilization_pct": 82.5,
+    "growth_pct": 5.6
+  },
+  {
+    "id": "c15",
+    "category": "Image Generation",
+    "current_cost": 220,
+    "yesterday_cost": 205,
+    "monthly_cost": 4800,
+    "budget": 6000,
+    "utilization_pct": 80,
+    "growth_pct": 7.3
+  },
+  {
+    "id": "c16",
+    "category": "Monitoring Tools",
+    "current_cost": 130,
+    "yesterday_cost": 128,
+    "monthly_cost": 2900,
+    "budget": 3500,
+    "utilization_pct": 82.9,
+    "growth_pct": 1.6
+  }
 ]

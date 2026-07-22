@@ -1,6 +1,62 @@
 [
-  { "id": "d1", "db_name": "Postgres", "allocated_storage": 2000, "used_storage": 1480, "connections": 420, "read_ops": 8400000, "write_ops": 1200000, "queries": 9600000, "latency": 12, "backup_size": 620, "backup_cost": 140, "growth": 3.2, "monthly_cost": 3800 },
-  { "id": "d2", "db_name": "MongoDB", "allocated_storage": 1500, "used_storage": 980, "connections": 260, "read_ops": 5200000, "write_ops": 940000, "queries": 6100000, "latency": 18, "backup_size": 410, "backup_cost": 95, "growth": 4.1, "monthly_cost": 2600 },
-  { "id": "d3", "db_name": "Redis", "allocated_storage": 320, "used_storage": 248, "connections": 840, "read_ops": 42000000, "write_ops": 8400000, "queries": 50000000, "latency": 1.2, "backup_size": 60, "backup_cost": 20, "growth": 2.6, "monthly_cost": 1400 },
-  { "id": "d4", "db_name": "Elastic", "allocated_storage": 1800, "used_storage": 1320, "connections": 180, "read_ops": 6800000, "write_ops": 1400000, "queries": 8100000, "latency": 24, "backup_size": 480, "backup_cost": 110, "growth": 3.8, "monthly_cost": 3200 }
+  {
+    "id": "d1",
+    "db_name": "Postgres",
+    "allocated_storage": 2000,
+    "used_storage": 1480,
+    "connections": 420,
+    "read_ops": 8400000,
+    "write_ops": 1200000,
+    "queries": 9600000,
+    "latency": 12,
+    "backup_size": 620,
+    "backup_cost": 140,
+    "growth": 3.2,
+    "monthly_cost": 3800
+  },
+  {
+    "id": "d2",
+    "db_name": "MongoDB",
+    "allocated_storage": 1500,
+    "used_storage": 980,
+    "connections": 260,
+    "read_ops": 5200000,
+    "write_ops": 940000,
+    "queries": 6100000,
+    "latency": 18,
+    "backup_size": 410,
+    "backup_cost": 95,
+    "growth": 4.1,
+    "monthly_cost": 2600
+  },
+  {
+    "id": "d3",
+    "db_name": "Redis",
+    "allocated_storage": 320,
+    "used_storage": 248,
+    "connections": 840,
+    "read_ops": 42000000,
+    "write_ops": 8400000,
+    "queries": 50000000,
+    "latency": 1.2,
+    "backup_size": 60,
+    "backup_cost": 20,
+    "growth": 2.6,
+    "monthly_cost": 1800
+  },
+  {
+    "id": "d4",
+    "db_name": "Elastic",
+    "allocated_storage": 1800,
+    "used_storage": 1320,
+    "connections": 180,
+    "read_ops": 6800000,
+    "write_ops": 1400000,
+    "queries": 8100000,
+    "latency": 24,
+    "backup_size": 480,
+    "backup_cost": 110,
+    "growth": 3.8,
+    "monthly_cost": 3200
+  }
 ]
